@@ -1,0 +1,169 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Models\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Models\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T15:00:28.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Models\\Account.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Models\\Account.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:59:36.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductsAdminController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:58.713Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:57.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GenresController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\GenresController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:55.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DiscountsController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DiscountsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:54.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DashBoardsController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\DashBoardsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:52.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:56:34.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "DoAn_LapTrinhWeb\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T03:51:53.61Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

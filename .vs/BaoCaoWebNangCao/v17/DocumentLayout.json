@@ -1,0 +1,959 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\cart\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\cart\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\accountaddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\accountaddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\address-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\address-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\cart\\viewcart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\cart\\viewcart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\cart\\previewcart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\cart\\previewcart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\shared\\main_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\shared\\main_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\account\\address.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\account\\address.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\jquery.validate.unobtrusive.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\jquery.validate.unobtrusive.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\jquery.validate.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\jquery.validate.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\cookie.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\cookie.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\common.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\common.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\comment-reply-product.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\comment-reply-product.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\checkout-order.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\checkout-order.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\add-to-cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\add-to-cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\accounts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\accounts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\custom-notifi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\custom-notifi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\plugins\\ajax-mail.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\plugins\\ajax-mail.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\plugins\\aos.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\plugins\\aos.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\plugins\\jquery.instagramfeed.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\plugins\\jquery.instagramfeed.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\plugins\\venobox.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\plugins\\venobox.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\main.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\main.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\cookie.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\cookie.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\comment-reply-product.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\comment-reply-product.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\checkout-order.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\checkout-order.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\cart.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\cart.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\add-to-cart .min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\add-to-cart .min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\userjs\\minifyjs\\address-manager.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\userjs\\minifyjs\\address-manager.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\adminjs\\discounts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\adminjs\\discounts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\delivery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\delivery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\views\\auth\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\views\\auth\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\scripts\\adminjs\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\scripts\\adminjs\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\controllers\\feedbackscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\controllers\\feedbackscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\emailtemplate\\emailorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\emailtemplate\\emailorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\emailtemplate\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\emailtemplate\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\account\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\account\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\account\\changepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\account\\changepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\account\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\account\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\controllers\\productsadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\controllers\\productsadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\areas\\admin\\views\\productsadmin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\areas\\admin\\views\\productsadmin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|d:\\web_nang_cao\\websitelaptop\\websitelaptop\\baocaowebnangcao\\views\\account\\trackingorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{834F5E83-5175-4EE7-A8C3-AA47694C16EC}|BaoCaoWebNangCao\\BaoCaoWebNangCao.csproj|solutionrelative:baocaowebnangcao\\views\\account\\trackingorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountAddress.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\AccountAddress.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\AccountAddress.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\AccountAddress.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\AccountAddress.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAiwCoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T16:27:20.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "cookie.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\cookie.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\cookie.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\cookie.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\cookie.js",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowFoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T10:00:41.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "common.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\common.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\common.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\common.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\common.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T10:00:22.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "comment-reply-product.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\comment-reply-product.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\comment-reply-product.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\comment-reply-product.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\comment-reply-product.js",
+              "ViewState": "AgIAAF4BAAAAAAAAAAAowGUBAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:55:18.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Account\\Login.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAACMAAAAAAAAAAAAkwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:25:48.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAADEDAAAAAAAAAAAkwPsDAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:20:30.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\CartController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAUwGoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T03:43:38.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Checkout.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\Checkout.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Cart\\Checkout.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\Checkout.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Cart\\Checkout.cshtml",
+              "ViewState": "AgIAADkBAAAAAAAAAADgv0gBAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:16:51.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PreviewCart.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\PreviewCart.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Cart\\PreviewCart.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\PreviewCart.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Cart\\PreviewCart.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAwwEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T03:26:14.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ViewCart.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\ViewCart.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Cart\\ViewCart.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Cart\\ViewCart.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Cart\\ViewCart.cshtml",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAwwMEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T03:25:34.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "cart.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\cart.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\cart.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\cart.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\cart.js",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAywKkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:48:28.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "address-manager.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\address-manager.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\address-manager.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\address-manager.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\address-manager.js",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAIwMABAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:41:14.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Main_Layout.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Shared\\Main_Layout.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Shared\\Main_Layout.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Shared\\Main_Layout.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Shared\\Main_Layout.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T13:21:46.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "jquery.validate.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T10:10:00.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "main.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\main.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\main.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\main.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\main.js",
+              "ViewState": "AgIAAOkBAAAAAAAAAAAswAoCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T10:10:07.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "jquery.validate.unobtrusive.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.unobtrusive.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.unobtrusive.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.unobtrusive.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\jquery.validate.unobtrusive.js",
+              "ViewState": "AgIAABMBAAAAAAAAAAAAAAcBAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T10:10:08.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Address.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\Address.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Account\\Address.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\Address.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Account\\Address.cshtml",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAkwIYBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T11:29:01.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "checkout-order.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\checkout-order.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\checkout-order.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\checkout-order.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\checkout-order.js",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAowCABAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:53:12.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "add-to-cart.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\add-to-cart.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\add-to-cart.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\add-to-cart.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\add-to-cart.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:39:07.205Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "accounts.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\accounts.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\accounts.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\accounts.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\accounts.js",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAowIYAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T09:23:40.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "jquery.instagramFeed.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\jquery.instagramFeed.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\jquery.instagramFeed.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\jquery.instagramFeed.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\jquery.instagramFeed.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:54:12.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "aos.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\aos.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\aos.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\aos.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\aos.min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:54:10.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ajax-mail.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\ajax-mail.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\ajax-mail.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\ajax-mail.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\ajax-mail.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:54:08.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "venobox.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\venobox.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\venobox.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\venobox.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\plugins\\venobox.min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:53:56.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "main.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\main.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\main.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\main.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\main.min.js",
+              "ViewState": "AgIAAAcBAAAAAAAAAAAowB0BAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:33.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "cookie.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cookie.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cookie.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cookie.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cookie.min.js",
+              "ViewState": "AgIAADIAAAAAAAAAAAAowEQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:32.888Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "comment-reply-product.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\comment-reply-product.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\comment-reply-product.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\comment-reply-product.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\comment-reply-product.min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:31.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "custom-notifi.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\custom-notifi.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\custom-notifi.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\custom-notifi.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\custom-notifi.js",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAowHsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T01:19:22.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "checkout-order.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\checkout-order.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\checkout-order.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\checkout-order.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\checkout-order.min.js",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAowBEBAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:30.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "add-to-cart .min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\add-to-cart .min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\add-to-cart .min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\add-to-cart .min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\add-to-cart .min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:27.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "address-manager.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\address-manager.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\address-manager.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\address-manager.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\address-manager.min.js",
+              "ViewState": "AgIAAPcBAAAAAAAAAAAowB4CAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:05:26.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "cart.min.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cart.min.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cart.min.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cart.min.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\UserJS\\MinifyJS\\cart.min.js",
+              "ViewState": "AgIAAOkAAAAAAAAAAAAowPwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:03:15.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "discounts.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\AdminJS\\discounts.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\AdminJS\\discounts.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\AdminJS\\discounts.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\AdminJS\\discounts.js",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAAABYAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T08:00:35.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Delivery.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Delivery.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Delivery.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Delivery.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Delivery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:05:36.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Discount.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Discount.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Discount.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Discount.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Discount.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:04:52.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\BaseController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAcwB8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:53:22.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\EmailTemplate\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\EmailTemplate\\ResetPassword.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\EmailTemplate\\ResetPassword.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\EmailTemplate\\ResetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:44:52.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "EmailOrders.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\EmailTemplate\\EmailOrders.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\EmailTemplate\\EmailOrders.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\EmailTemplate\\EmailOrders.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\EmailTemplate\\EmailOrders.cshtml",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:44:49.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Register.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\Register.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Account\\Register.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\Register.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Account\\Register.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:35:56.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Contact.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Contact.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Contact.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:05:39.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\App_Start\\BundleConfig.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\App_Start\\BundleConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T03:25:15.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ChangePassword.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\ChangePassword.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Account\\ChangePassword.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\ChangePassword.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Account\\ChangePassword.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:35:51.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAWwDoAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:26:10.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Global.asax.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Global.asax.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Global.asax.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Global.asax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:06:47.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Views\\Auth\\Index.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Views\\Auth\\Index.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Views\\Auth\\Index.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Views\\Auth\\Index.cshtml",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAgwIsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:22:33.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "FeedbacksController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\FeedbacksController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\FeedbacksController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\FeedbacksController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\FeedbacksController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:30.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "auth.js",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\AdminJS\\auth.js",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Scripts\\AdminJS\\auth.js",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Scripts\\AdminJS\\auth.js",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Scripts\\AdminJS\\auth.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-22T02:53:02.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAADwvyIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:22:17.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "AccountViewModels.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\AccountViewModels.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Account\\AccountViewModels.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account\\AccountViewModels.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Account\\AccountViewModels.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwCcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:34:59.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Models\\Account.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Models\\Account.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Models\\Account.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAiwDcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:23:01.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "ProductsAdminController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Controllers\\ProductsAdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:29:58.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Views\\ProductsAdmin\\Edit.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Areas\\Admin\\Views\\ProductsAdmin\\Edit.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Areas\\Admin\\Views\\ProductsAdmin\\Edit.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Areas\\Admin\\Views\\ProductsAdmin\\Edit.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:21:54.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:12:25.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\DbContext.cs",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\DbContext.cs",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\DbContext.cs",
+              "RelativeToolTip": "BaoCaoWebNangCao\\DbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:11:23.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "TrackingOrder.cshtml",
+              "DocumentMoniker": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\TrackingOrder.cshtml",
+              "RelativeDocumentMoniker": "BaoCaoWebNangCao\\Views\\Account\\TrackingOrder.cshtml",
+              "ToolTip": "D:\\WEB_NANG_CAO\\WebsiteLaptop\\WebsiteLaptop\\BaoCaoWebNangCao\\Views\\Account\\TrackingOrder.cshtml",
+              "RelativeToolTip": "BaoCaoWebNangCao\\Views\\Account\\TrackingOrder.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T01:11:04.65Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

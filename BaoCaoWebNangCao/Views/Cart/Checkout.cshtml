@@ -1,0 +1,475 @@
+﻿@using DoAn_LapTrinhWeb.Common.Helpers
+@model DoAn_LapTrinhWeb.Models.Account
+@{
+    ViewBag.Title = "Thanh toán đơn hàng";
+    Layout = "~/Views/Shared/Main_Layout.cshtml";
+    List<int> quans = ViewBag.Quans as List<int>;
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var listProduct = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.ListProduct;
+    var listAddress = (List<DoAn_LapTrinhWeb.Models.AccountAddress>)ViewBag.ListAddress;
+    var listProvince = (List<DoAn_LapTrinhWeb.Models.Provinces>)ViewBag.ListProvince;
+    var listDistrict = (List<DoAn_LapTrinhWeb.Models.Districts>)ViewBag.ListDistrict;
+    var listWard = (List<DoAn_LapTrinhWeb.Models.Wards>)ViewBag.ListWard;
+    var myAddress = (DoAn_LapTrinhWeb.Models.AccountAddress)ViewBag.MyAddress;
+    var discountPrice = Convert.ToDouble(ViewBag.Discount);
+
+    // Tính giá gốc của các sản phẩm (Tạm tính)
+    double price = 0d;
+    for (int i = 0; i < listProduct.Count(); i++)
+    {
+        var item = listProduct.ElementAt(i);
+        var quan = quans[i];
+        var productPrice = item.price;
+        if (item.Discount != null && item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
+        {
+            productPrice = item.price - item.Discount.discount_price;
+        }
+        price += productPrice * quan;
+    }
+
+    // Áp dụng mã giảm giá chỉ cho giá sản phẩm, không áp dụng cho phí vận chuyển
+    double discountedPrice = Math.Max(0, price - discountPrice); // Giá sản phẩm sau giảm, không âm
+    var shippingFee = 30000d; // Phí vận chuyển 30,000 VNĐ
+    var total = discountedPrice + shippingFee; // Tổng tiền cuối cùng = giá sản phẩm sau giảm + phí vận chuyển
+
+    TempData["Total"] = total; // Lưu tổng tiền vào TempData để sử dụng trong SaveOrder
+}
+
+<style>
+    .nice-select {
+        display: none !important;
+    }
+    /* Ẩn giao diện select mặc định của thư viện nice-select */
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Ẩn nút tăng/giảm trong input number */
+    .address-toggle {
+        cursor: pointer;
+        color: #3674ab;
+        font-weight: 500;
+    }
+
+    .list-group-item-action:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+@section scripts{
+    <script src="~/Scripts/UserJS/address-manager.js"></script> <!-- Script xử lý quản lý địa chỉ (thêm, chọn địa chỉ) -->
+    <script>
+        $(document).ready(function () {
+            // Khởi tạo các modal
+            window.createmodal = $('#ModalCreate');
+            window.editModal = $('#EditAddress');
+            window.defaultmodal = $('#defaultModal');
+            window.delmodal = $('#deleteModal');
+
+            // Khởi tạo các biến toàn cục
+            window.ide = null;
+            window.defaultID = null;
+            window.idde = null;
+
+            // Hiển thị modal khi click nút thêm địa chỉ
+            $('#popupcreateaddress').click(function () {
+                var myobj = $('.nice-select');
+                myobj.remove();
+                createmodal.modal('show');
+            });
+
+            // Đóng các modal khi click nút đóng
+            $('#closemodal').click(function () {
+                editModal.modal('hide');
+            });
+            $('#closemodal1').click(function () {
+                editModal.modal('hide');
+            });
+            $('#closemodal4').click(function () {
+                editModal2.modal('hide');
+            });
+            $('#closemodal5').click(function () {
+                editModal2.modal('hide');
+            });
+            $('#closemodal3').click(function () {
+                createmodal.modal('hide');
+            });
+
+            // Đóng modal đổi địa chỉ mặc định
+            $("#cancle-defalt").click(function () {
+                defaultmodal.modal('hide');
+            });
+
+            // Đóng modal xóa địa chỉ
+            $("#cancle_delete_address").click(function () {
+                delmodal.modal('hide');
+            });
+
+            // Xử lý khi click nút xác nhận sửa địa chỉ
+            $('#confirmeditBtn').click(function () {
+                handleEditAddress();
+            });
+
+            // Xử lý khi click nút xác nhận đổi địa chỉ mặc định
+            $('#btn-default-submit').click(function () {
+                handleDefaultAddress();
+            });
+
+            // Xử lý khi click nút xác nhận xóa địa chỉ
+            $('#btndelete_address').click(function () {
+                handleDeleteAddress();
+            });
+
+            // Kiểm tra thông tin trước khi lưu đơn hàng
+            $('#save-order').click(function () {
+                const provinceID = $('#province').val();
+                const districtID = $('#district').val();
+                const wardID = $('#ward').val();
+                const userName = $('#user-name').val();
+                const userPhoneNumber = $('#phone-number').val();
+                const content = $('#content').val();
+
+                if (provinceID == "" || districtID == "" || wardID == "" || userName == "" || userPhoneNumber == "" || content == "") {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer);
+                            toast.addEventListener('mouseleave', Swal.resumeTimer);
+                        }
+                    });
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Nhập thông tin còn thiếu'
+                    });
+                    return false;
+                } else {
+                    $('#save-order').attr('type', 'submit');
+                }
+            });
+        });
+
+        // Hàm hiển thị modal sửa địa chỉ
+        window.EditAddress = function (id, username, phonenumber, province_id, district_id, ward_id, address_content) {
+            var myobj = $('.nice-select');
+            myobj.remove();
+            ide = id;
+            $('#province_edit').val(province_id);
+            $('#address_name_edit').val(username);
+            $('#district_edit').val(district_id);
+            $('#ward_edit').val(ward_id);
+            $('#address_content_edit').val(address_content);
+            $('#address_phone_edit').val(phonenumber);
+            editModal.modal('show');
+        };
+
+        // Hàm hiển thị modal xác nhận đổi địa chỉ mặc định
+        window.defaultConfirm = function (id) {
+            defaultmodal.modal('show');
+            defaultID = id;
+        };
+
+        // Hàm hiển thị modal xác nhận xóa địa chỉ
+        window.deleteConfirm = function (id) {
+            delmodal.modal('show');
+            idde = id;
+        };
+    </script>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <!-- Breadcrumb: Hiển thị đường dẫn điều hướng -->
+    <div class="breadcrumb-section breadcrumb-bg-color--black">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                                    <li><a href="@Url.Action("ViewCart", "Cart")">Giỏ hàng</a></li>
+                                    <li class="active" aria-current="page">Thanh toán</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Section: Hiển thị thông tin thanh toán -->
+    <div class="checkout-section">
+        <div class="container">
+            <div class="checkout_form" data-aos="fade-up" data-aos-delay="0">
+                <form method="post" action="@Url.Action("SaveOrder", "Cart")">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h3>Thông tin nhận hàng</h3>
+                            <div class="row">
+                                @if (ViewBag.CountAddress > 0) // Nếu người dùng đã có địa chỉ
+                                {
+                                    <!-- Hiển thị form chọn địa chỉ -->
+                                    <div class="col-lg-12">
+                                        <label for="country" style="font-weight:500">Tỉnh/ Thành phố <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <select class="d-block form-select form-select-solid" name="province_id" id="province">
+                                                <option value="">Tỉnh/ Thành phố</option>
+                                                @foreach (var province in listProvince)
+                                                {
+                                                    <option @(province.province_id == myAddress.province_id ? "selected" : "") value="@province.province_id">@province.province_name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label style="font-weight:500">Quận/ Huyện <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <select id="district" name="district_id" class="d-block form-select form-select-solid">
+                                                <option value="">Quận/ Huyện</option>
+                                                @foreach (var district in listDistrict)
+                                                {
+                                                    if (district.province_id == myAddress.province_id)
+                                                    {
+                                                        <option @(district.district_id == myAddress.district_id ? "selected" : "") value="@district.district_id">@district.type @district.district_name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label style="font-weight:500">Phường/ Xã <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <select id="ward" name="ward_id" class="d-block form-select form-select-solid">
+                                                <option value="">Phường/ Xã</option>
+                                                @foreach (var ward in listWard)
+                                                {
+                                                    if (ward.district_id == myAddress.district_id)
+                                                    {
+                                                        <option @(ward.ward_id == myAddress.ward_id ? "selected" : "") value="@ward.ward_id">@ward.type @ward.ward_name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label style="font-weight:500">Họ tên người nhận <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <input type="text" id="user-name" name="orderUsername" value="@myAddress.accountUsername">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label style="font-weight:500">Số điện thoại <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <input type="number" min="1" id="phone-number" name="orderPhonenumber" value="@myAddress.accountPhoneNumber">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label style="font-weight:500">Địa chỉ cụ thể <span class="text-danger">*</span></label>
+                                        <div class="default-form-box">
+                                            <input type="text" name="content" id="content" value="@myAddress.content">
+                                        </div>
+                                    </div>
+
+                                    <!-- Thay checkbox bằng phần tử nhấp để xổ danh sách địa chỉ -->
+                                    <div class="col-12 mt-3">
+                                        <div class="address-toggle" data-bs-toggle="collapse" data-bs-target="#addressList">
+                                            <span>Chọn địa chỉ khác</span>
+                                        </div>
+                                        <div class="collapse mt-2" id="addressList">
+                                            <div class="list-group">
+                                                @foreach (var address in listAddress.Where(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
+                                                {
+                                                    var province = listProvince.FirstOrDefault(p => p.province_id == address.province_id);
+                                                    var district = listDistrict.FirstOrDefault(d => d.district_id == address.district_id);
+                                                    var ward = listWard.FirstOrDefault(w => w.ward_id == address.ward_id);
+                                                    <button type="button" class="list-group-item list-group-item-action select-address"
+                                                            data-address-id="@address.account_address_id"
+                                                            data-province-id="@address.province_id"
+                                                            data-district-id="@address.district_id"
+                                                            data-ward-id="@address.ward_id"
+                                                            data-username="@address.accountUsername"
+                                                            data-phone="@address.accountPhoneNumber"
+                                                            data-content="@address.content">
+                                                        @address.accountUsername - @address.accountPhoneNumber, @address.content,
+                                                        @(ward != null ? ward.type + " " + ward.ward_name : ""), @(district != null ? district.type + " " + district.district_name : ""), @(province != null ? province.province_name : "")
+                                                    </button>
+                                                }
+                                                @if (!listAddress.Any(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
+                                                {
+                                                    <div class="text-muted p-2">Bạn chưa có địa chỉ nào khác.</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <div class="order-notes">
+                                            <label for="OrderNote" style="font-weight:500">Ghi chú đơn hàng</label>
+                                            <textarea name="OrderNote" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: những lưu ý đặc biệt khi giao hàng."></textarea>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <!-- Nếu chưa có địa chỉ, hiển thị nút mở modal để thêm địa chỉ -->
+                                    <div class="col-12 text-center">
+                                        <button style="margin-top: 20px; font-weight: 600; color: #FE8C23; font-size:19px;" id="popupcreateaddress" type="button">Thêm mới địa chỉ</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <h3>Đơn đặt hàng của bạn</h3>
+                            <div class="order_table table-responsive" style="overflow-x: hidden; border-left: 0.5px solid #0000001c; border-right: 0.5px solid #0000001c; border-top: 0.5px solid #0000001c;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Sản Phẩm</th>
+                                            <th>Tổng Giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < listProduct.Count(); i++)
+                                        {
+                                            var item = listProduct.ElementAt(i);
+                                            var quan = quans[i];
+                                            var price2 = item.price;
+                                            int maxquantity = Int32.Parse(item.quantity);
+                                            if (item.Discount != null && item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
+                                            {
+                                                price2 = item.price - item.Discount.discount_price;
+                                            }
+                                            <tr>
+                                                <td style="max-width:500px!important;">
+                                                    <a target="_blank" href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id">
+                                                        @item.product_name <strong style="color: #3674ab;"> × @quan</strong>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        double total3 = 0;
+                                                        total3 = price2 * quan;
+                                                    }
+                                                    <span>@total3.ToString("#,0₫", culture.NumberFormat)</span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot style="font-weight:500">
+                                        <tr>
+                                            <th>Tạm tính</th>
+                                            <td>@price.ToString("#,0₫", culture.NumberFormat)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Giảm giá</th>
+                                            <td>@discountPrice.ToString("#,0₫", culture.NumberFormat)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phí vận chuyển</th>
+                                            <td>@shippingFee.ToString("#,0₫", culture.NumberFormat)</td>
+                                        </tr>
+                                        <tr class="order_total">
+                                            <th>Thành tiền</th>
+                                            <td style="font-size:20px;color:rgb(235, 33, 1);">@total.ToString("#,0₫", culture.NumberFormat)</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment_method">
+                                <div class="order_button d-flex justify-content-end">
+                                    <button class="btn btn-md btn-black-default-hover" id="save-order" type="button">
+                                        Đặt hàng ngay
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal để thêm địa chỉ mới -->
+<div class="modal fade create_modal" id="ModalCreate">
+    <div class="modal-dialog modal-dialog-centered" style="min-width: 300px !important; max-width: 600px !important;" role="document">
+        <div class="modal-content">
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closemodal3">
+                    <span aria-hidden="true">
+                        <svg>...</svg>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="create_address">
+                    <div class="mb-4 text-center">
+                        <h1 class="mb-3">Thêm mới địa chỉ</h1>
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Họ tên<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <input type="text" maxlength="20" class="form-control form-control-solid d-block" id="address_name" autocomplete="off" value="@User.Identity.GetName()" placeholder="Nhập họ tên" name="accountUsername">
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Số điện thoại<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <input type="number" maxlength="10" class="form-control form-control-solid d-block" id="address_phone" placeholder="Số điện thoại" value="" name="accountPhoneNumber">
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Tỉnh/Thành Phố<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <select name="province_id" id="province" class="form-select form-select-solid select2-hidden-accessible d-block">
+                            <option value="">Tỉnh/ Thành Phố</option>
+                            @foreach (var province in listProvince)
+                            {
+                                <option value="@province.province_id">@province.province_name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Quận/ Huyện<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <select disabled id="district" name="district_id" class="form-select form-select-solid select2-hidden-accessible cursor-disable d-block">
+                            <option value="">Quận/ Huyện</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Phường/ Xã<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <select disabled name="ward_id" id="ward" class="form-select form-select-solid select2-hidden-accessible cursor-disable d-block">
+                            <option value="">Phường/ Xã</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 mb-1">
+                            <span class="required">Địa chỉ cụ thể<span class="ms-1 text-danger">*</span></span>
+                        </label>
+                        <input type="text" maxlength="50" class="form-control form-control-solid" id="address_content" placeholder="Nhập địa chỉ cụ thể" name="content">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" hidden name="isDefault" checked="checked" value="true" id="checkeddefault" />
+                        <input type="hidden" value="false" name="account_address_default" />
+                    </div>
+                    <div class="text-danger fs-14px mb-4">*Những mục đánh dấu màu đỏ là bắt buộc</div>
+                    <div class="text-center custom-btn-address">
+                        <button type="reset" class="btn btn-secondary" id="closemodal3" style="margin-right:10px;">Hủy</button>
+                        <button type="button" onclick="SaveAddress()" class="btn btn-primary">
+                            <span class="indicator-label">Lưu</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
