@@ -118,7 +118,7 @@
                                                             <!--end::Svg Icon-->Ngày đặt
                                                         </div>
                                                     </td>
-                                                    <td class="fw-bolder text-end">@Model.oder_date.ToString("HH:mm dd/MM/yyyy")</td>
+                                                    <td class="fw-bolder text-end">@String.Format("{0:HH:mm dd/MM/yyyy}", Model.order_date)</td>
                                                 </tr>
                                                 <!--end::Date-->
                                                 <!--begin::Payment method-->
@@ -343,7 +343,7 @@
                                                                 <!--end::Quantity-->
                                                                 <!--begin::Price-->
                                                                 <td class="text-end">
-                                                                    @item.price.ToString("#,0₫", culture.NumberFormat)
+                                                                    @item.price.ToString("{0:#,0₫}", culture.NumberFormat)
                                                                 </td>
                                                                 <!--end::Price-->
                                                                 <!--begin::Total-->
@@ -351,7 +351,7 @@
                                                                     @{
                                                                         total += item.quantity * item.price;
                                                                         double total2 = item.quantity * item.price;
-                                                                        <span>@total2.ToString("#,0₫", culture.NumberFormat)</span>
+                                                                        <span>@total2.ToString("{0:#,0₫}", culture.NumberFormat)</span>
                                                                     }
                                                                 </td>
                                                                 <!--end::Total-->
@@ -360,13 +360,13 @@
                                                         <!--begin::Subtotal-->
                                                         <tr>
                                                             <td colspan="3" class="text-end">Tạm tính</td>
-                                                            <td class="text-end">@total.ToString("#,0₫", culture.NumberFormat)</td>
+                                                            <td class="text-end">@total.ToString("{0:#,0₫}", culture.NumberFormat)</td>
                                                         </tr>
                                                         <!--end::Subtotal-->
                                                         <!--begin::VAT-->
                                                         <tr>
                                                             <td colspan="3" class="text-end">Giảm giá</td>
-                                                            <td class="text-end">@((total + 30000 - Model.total).ToString("#,0₫", culture.NumberFormat))</td>
+                                                            <td class="text-end">@(String.Format(culture, "{0:#,0₫}", culture.NumberFormat, (total + 30000 - Model.total)))</td>
                                                         </tr>
                                                         <!--end::VAT-->
                                                         <!--begin::Shipping-->
@@ -378,7 +378,7 @@
                                                         <!--begin::Grand total-->
                                                         <tr>
                                                             <td colspan="3" class="fs-3 text-dark text-end">Tổng cộng</td>
-                                                            <td class="text-danger fs-3 fw-boldest text-end">@Model.total.ToString("#,0₫", culture.NumberFormat)</td>
+                                                            <td class="text-danger fs-3 fw-boldest text-end">@String.Format(culture, "{0:#,0₫}", Model.total)</td>
                                                         </tr>
                                                         <!--end::Grand total-->
                                                     </tbody>
@@ -430,10 +430,10 @@
                                                         <tr>
                                                             <td><a target="_blank" href="@Url.Action("Details","Orders",new {id=item.order_id})" class="text-dark">@item.order_id</a></td>
                                                             <!--begin::Date-->
-                                                            <td>@item.oder_date.ToString("HH:mm dd-MM-yyyy")</td>
+                                                            <td>@String.Format("{0:HH:mm dd-MM-yyyy}", item.order_date)</td>
                                                             <!--end::Date-->
                                                             <!--begin::Total-->
-                                                            <td>@item.total.ToString("#,0₫", culture.NumberFormat)</td>
+                                                            <td>@String.Format(culture, "{0:#,0₫}", item.total)</td>
                                                             <!--end::Total-->
                                                             <!--begin::Status-->
                                                             <td>

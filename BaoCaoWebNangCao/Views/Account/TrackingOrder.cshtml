@@ -1,6 +1,5 @@
 ﻿@using DoAn_LapTrinhWeb.Common.Helpers
 @using DoAn_LapTrinhWeb.Model
-
 @using PagedList
 @model IPagedList<DoAn_LapTrinhWeb.Model.Order>
 @{
@@ -21,12 +20,8 @@
                             <nav aria-label="breadcrumb">
                                 <ul>
                                     <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-                                    <li>
-                                        <a href="#">Tài khoản</a>
-                                    </li>
-                                    <li class="active" aria-current="page">
-                                        Lịch sử mua hàng
-                                    </li>
+                                    <li><a href="#">Tài khoản</a></li>
+                                    <li class="active" aria-current="page">Lịch sử mua hàng</li>
                                 </ul>
                             </nav>
                         </div>
@@ -46,44 +41,255 @@
                     <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="0">
                         <div id="orders">
                             <h4>Lịch sử mua hàng</h4>
-                            <div class="table_page table-responsive" style="overflow-x: hidden; border-left: 0.5px solid #0000001c; border-right: 0.5px solid #0000001c; border-top: 0.5px solid #0000001c;">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Đơn Hàng</th>
-                                            <th>Ngày đặt</th>
-                                            <th>Trạng thái</th>
-                                            <th>Số lượng đặt</th>
-                                            <th>Tổng Tiền</th>
-                                            <th>Hành động</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>#@item.order_id</td>
-                                                <td>@item.oder_date.ToString("HH:mm dd-MM-yyyy")</td>
-                                                <td>@(item.status == "1" ? "Chờ xử lý": item.status == "2"? "Đang xử lý" : item.status == "3" ? "Hoàn thành": "Bị hủy")</td>
-                                                <td>@item.Oder_Detail.Sum(m => m.quantity)</td>
-                                                <td>@item.total.ToString("#,0₫", culture.NumberFormat)</td>
-                                                <td><a href="@Url.Action("TrackingOrderDetail","Account",new {id=item.order_id})" class="view">Xem</a></td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                            <style>
+                                .filter-search .form-control {
+                                    margin-bottom: 10px;
+                                    padding: 8px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 4px;
+                                    width: 100%;
+                                }
+
+                                .filter-search .btn-primary {
+                                    width: 100%;
+                                    padding: 8px;
+                                    background-color: #007bff;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                }
+
+                                    .filter-search .btn-primary:hover {
+                                        background-color: #0056b3;
+                                    }
+
+                                .filter-search .row {
+                                    display: flex;
+                                    gap: 15px;
+                                    margin-bottom: 20px;
+                                }
+
+                                .status-pending {
+                                    color: #ffc107;
+                                }
+
+                                .status-processing {
+                                    color: #17a2b8;
+                                }
+
+                                .status-completed {
+                                    color: #28a745;
+                                }
+
+                                .status-canceled {
+                                    color: #dc3545;
+                                }
+
+                                    .status-pending i, .status-processing i, .status-completed i, .status-canceled i {
+                                        margin-right: 5px;
+                                        font-size: 10px;
+                                    }
+
+                                .view, .cancel, .reorder {
+                                    display: inline-block;
+                                    margin-right: 10px;
+                                    padding: 5px 10px;
+                                    text-decoration: none;
+                                    border-radius: 4px;
+                                    color: white;
+                                }
+
+                                .view {
+                                    background-color: #007bff;
+                                }
+
+                                .cancel {
+                                    background-color: #dc3545;
+                                }
+
+                                .reorder {
+                                    background-color: #28a745;
+                                }
+                            </style>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+                            <div class="filter-search" data-aos="fade-up" data-aos-delay="0">
+                                <form method="get" action="@Url.Action("TrackingOrder", "Account")">
+                                    <div class="row">
+                                        <div style="flex: 1;">
+                                            <label for="status">Trạng thái</label>
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="">Tất cả</option>
+                                                <option value="1" @(Request.QueryString["status"] == "1" ? "selected" : "")>Chờ xử lý</option>
+                                                <option value="2" @(Request.QueryString["status"] == "2" ? "selected" : "")>Đang xử lý</option>
+                                                <option value="3" @(Request.QueryString["status"] == "3" ? "selected" : "")>Hoàn thành</option>
+                                                <option value="0" @(Request.QueryString["status"] == "0" ? "selected" : "")>Bị hủy</option>
+                                            </select>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <label for="orderId">Mã đơn hàng</label>
+                                            <input type="text" name="orderId" id="orderId" class="form-control" placeholder="Nhập mã đơn hàng" value="@Request.QueryString["orderId"]" />
+                                        </div>
+                                        <div style="flex: 1; align-self: flex-end;">
+                                            <button type="submit" class="btn-primary">Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+                            @if (!Model.Any())
+                            {
+                                <p style="text-align: center; color: #dc3545; font-weight: 500; margin: 20px 0;">
+                                    @(string.IsNullOrEmpty(Request.QueryString["status"]) && string.IsNullOrEmpty(Request.QueryString["orderId"])
+                                        ? "Bạn chưa có đơn hàng nào."
+                                        : "Không tìm thấy đơn hàng phù hợp.")
+                                </p>
+                            }
+                            else
+                            {
+                                <div class="table_page table-responsive" style="overflow-x: hidden; border-left: 0.5px solid #0000001c; border-right: 0.5px solid #0000001c; border-top: 0.5px solid #0000001c;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Đơn Hàng</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Trạng thái</th>
+                                                <th>Số lượng đặt</th>
+                                                <th>Tổng Tiền</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>#@item.order_id</td>
+                                                    <td>@(item.order_date != null ? ((DateTime)item.order_date).ToString("HH:mm dd-MM-yyyy") : "N/A")</td>
+                                                    <td>
+                                                        @{
+                                                            string statusClass = (item.status switch
+                                                            {
+                                                                "1" => "status-pending",
+                                                                "2" => "status-processing",
+                                                                "3" => "status-completed",
+                                                                _ => "status-canceled"
+                                                            });
+                                                            string statusText = (item.status switch
+                                                            {
+                                                                "1" => "Chờ xử lý",
+                                                                "2" => "Đang xử lý",
+                                                                "3" => "Hoàn thành",
+                                                                _ => "Bị hủy"
+                                                            });
+                                                        }
+                                                        <span class="@statusClass">
+                                                            <i class="fa fa-circle" aria-hidden="true"></i> @statusText
+                                                        </span>
+                                                    </td>
+                                                    <td>@(item.Oder_Detail != null ? item.Oder_Detail.Sum(m => m.quantity) : 0)</td>
+                                                    <td>@string.Format(culture, "{0:#,0₫}", item.total ?? 0)</td>
+                                                    <td>
+                                                        <a href="@Url.Action("TrackingOrderDetail", "Account", new { id = item.order_id })" class="view">Xem</a>
+                                                        @if (item.status == "1")
+                                                        {
+                                                            <a href="#" onclick="cancelOrderOpen(@item.order_id)" class="cancel">Hủy</a>
+                                                        }
+                                                        @if (item.status == "3")
+                                                        {
+                                                            <a href="@Url.Action("ReOrder", "Account", new { id = item.order_id })" class="reorder">Mua lại</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start Pagination -->
+                                <div class="page-pagination text-center d-flex justify-content-center" data-aos="fade-up" data-aos-delay="0">
+                                    @Html.Partial("Pager", Model)
+                                </div>
+                                <!-- End Pagination -->
+                            }
                         </div>
-                        <!-- Start Pagination -->
-                        <div class="page-pagination text-center d-flex justify-content-center" data-aos="fade-up" data-aos-delay="0">
-                            @Html.Partial("Pager", Model)
-                        </div>
-                        <!-- End Pagination -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- ...:::: End Account Dashboard Section:::... -->
-
+    <!--begin::Modal - Cancel Order-->
+    <div class="modal fade" id="cancel-order-modal" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-500px">
+            <!--begin::Modal content-->
+            <div class="modal-content rounded">
+                <!--begin::Modal header-->
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                    <!--begin:Form-->
+                    <form id="cancel-order-form" class="form" method="post" action="@Url.Action("CancelOrder", "Account")">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" id="cancel-order-id" value="" />
+                        <!--begin::Heading-->
+                        <div class="mb-9 text-center">
+                            <!--begin::Title-->
+                            <i class="bi bi-x-circle text-danger" style="font-size:6rem"></i>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Label-->
+                        <div class="mb-9 text-center">
+                            <h2 style="color: #4c4b4b; font-size:2rem; font-weight:500;">Xác nhận hủy?</h2>
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Label-->
+                        <div class="mb-15 fw-bold text-center">
+                            <div class="fs-4" style="color: #565656;">
+                                Bạn thực sự muốn hủy đơn hàng "<span id="cancel-order-id-display" class="text-primary"></span>"? Quá trình này không thể hoàn tác.
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Actions-->
+                        <div class="text-center">
+                            <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Hủy bỏ</button>
+                            <button type="submit" id="cancel-submit" class="btn btn-danger">Xác nhận</button>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end:Form-->
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - Cancel Order-->
+}
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function cancelOrderOpen(orderId) {
+            // Set order ID in modal
+            document.getElementById('cancel-order-id').value = orderId;
+            document.getElementById('cancel-order-id-display').textContent = '#' + orderId;
+            // Show modal
+            var modal = new bootstrap.Modal(document.getElementById('cancel-order-modal'));
+            modal.show();
+        }
+    </script>
 }

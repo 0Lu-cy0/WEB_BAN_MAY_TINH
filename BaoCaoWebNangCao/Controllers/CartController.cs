@@ -1,7 +1,9 @@
-﻿using DoAn_LapTrinhWeb.Common;
+﻿using BaiTap.Service;
+using DoAn_LapTrinhWeb.Common;
 using DoAn_LapTrinhWeb.Common.Helpers;
 using DoAn_LapTrinhWeb.Model;
 using DoAn_LapTrinhWeb.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,177 +124,161 @@ namespace DoAn_LapTrinhWeb.Controllers
         {
             try
             {
-                var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); // Định dạng tiền tệ theo chuẩn Việt Nam
-                double priceSum = 0; // Tổng giá trị các sản phẩm (trước phí vận chuyển và giảm giá)
-                string productquancheck = "0"; // Biến kiểm tra số lượng sản phẩm còn lại
+                var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                double priceSum = 0;
+                string productquancheck = "0";
 
-                // Kiểm tra và xử lý mã giảm giá (nếu có)
                 if (Session["Discount"] != null && Session["Discountcode"] != null)
                 {
-                    string check_discount = Session["Discountcode"].ToString(); // Lấy mã giảm giá từ Session
-                    var discountupdatequan = db.Discounts.Where(d => d.discount_code == check_discount).SingleOrDefault(); // Tìm mã giảm giá trong cơ sở dữ liệu
-
-                    // Kiểm tra tính hợp lệ của mã giảm giá
+                    string check_discount = Session["Discountcode"].ToString();
+                    var discountupdatequan = db.Discounts.Where(d => d.discount_code == check_discount).SingleOrDefault();
                     if (discountupdatequan.quantity == 0 || discountupdatequan.discount_star >= DateTime.Now || discountupdatequan.discount_end <= DateTime.Now)
                     {
-                        Notification.setNotification3s("Mã giảm giá không thể sử dụng", "error"); // Thông báo lỗi
-                        return RedirectToAction("ViewCart", "Cart"); // Chuyển hướng về giỏ hàng
+                        Notification.setNotification3s("Mã giảm giá không thể sử dụng", "error");
+                        return RedirectToAction("ViewCart", "Cart");
                     }
                     else
                     {
-                        // Giảm số lượng mã giảm giá sau khi sử dụng
                         int newquantity = (discountupdatequan.quantity - 1);
                         discountupdatequan.quantity = newquantity;
                     }
                 }
 
-                orderAdress.timesEdit = 0; // Số lần chỉnh sửa địa chỉ đặt hàng
-                db.OrderAddresses.Add(orderAdress); // Thêm địa chỉ đặt hàng vào cơ sở dữ liệu
-                var cart = this.GetCart(); // Lấy thông tin giỏ hàng
-                var listProduct = new List<Product>(); // Danh sách sản phẩm để gửi email
+                orderAdress.timesEdit = 0;
+                db.OrderAddresses.Add(orderAdress);
+                var cart = this.GetCart();
+                var listProduct = new List<Product>();
 
-                // Tạo đơn hàng mới
                 var order = new Order()
                 {
-                    account_id = User.Identity.GetUserId(), // ID người dùng
-                    create_at = DateTime.Now, // Thời gian tạo
-                    create_by = User.Identity.GetUserId().ToString(), // Người tạo
-                    status = "1", // Trạng thái đơn hàng (1: mới tạo)
-                    order_note = Request.Form["OrderNote"].ToString(), // Ghi chú đơn hàng
-                    delivery_id = 1, // ID phương thức vận chuyển (mặc định)
-                    orderAddressId = orderAdress.orderAddressId, // ID địa chỉ đặt hàng
-                    oder_date = DateTime.Now, // Ngày đặt hàng
-                    update_at = DateTime.Now, // Thời gian cập nhật
-                    payment_id = 1, // ID phương thức thanh toán (mặc định)
-                    update_by = User.Identity.GetUserId().ToString(), // Người cập nhật
-                    total = Convert.ToDouble(TempData["Total"]) // Tổng tiền (bao gồm phí vận chuyển, sau giảm giá)
+                    account_id = User.Identity.GetUserId(),
+                    create_at = DateTime.Now,
+                    create_by = User.Identity.GetUserId().ToString(),
+                    status = "1",
+                    order_note = Request.Form["OrderNote"].ToString(),
+                    delivery_id = 1,
+                    orderAddressId = orderAdress.orderAddressId,
+                    order_date = DateTime.Now,
+                    update_at = DateTime.Now,
+                    payment_id = 1,
+                    update_by = User.Identity.GetUserId().ToString(),
+                    total = (float?)Convert.ToDouble(TempData["Total"] ?? 0) // Đảm bảo TempData["Total"] là double hợp lệ
                 };
 
-                // Thêm chi tiết đơn hàng (Order Details)
                 for (int i = 0; i < cart.Item1.Count; i++)
                 {
-                    var item = cart.Item1[i]; // Sản phẩm trong giỏ hàng
-                    var _price = item.price; // Giá gốc của sản phẩm
+                    var item = cart.Item1[i];
+                    var _price = item.price;
                     if (item.Discount != null)
                     {
-                        // Nếu sản phẩm có mã giảm giá hợp lệ
                         if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
                         {
-                            _price = item.price - item.Discount.discount_price; // Giá sau giảm
+                            _price = item.price - item.Discount.discount_price;
                         }
                     }
 
-                    // Thêm chi tiết đơn hàng vào Order
                     order.Oder_Detail.Add(new Oder_Detail
                     {
                         create_at = DateTime.Now,
                         create_by = User.Identity.GetUserId().ToString(),
-                        disscount_id = item.disscount_id, // ID mã giảm giá (nếu có)
-                        genre_id = item.genre_id, // ID thể loại sản phẩm
-                        price = _price, // Giá sau giảm
-                        product_id = item.product_id, // ID sản phẩm
-                        quantity = cart.Item2[i], // Số lượng
-                        status = "1", // Trạng thái chi tiết đơn hàng
+                        disscount_id = item.disscount_id,
+                        genre_id = item.genre_id,
+                        price = _price,
+                        product_id = item.product_id,
+                        quantity = cart.Item2[i],
+                        status = "1",
                         update_at = DateTime.Now,
                         update_by = User.Identity.GetUserId().ToString(),
-                        transection = "transection" // Giao dịch (chưa rõ mục đích)
+                        transection = "transection"
                     });
 
-                    // Xóa sản phẩm khỏi giỏ hàng (cookies)
                     Response.Cookies["product_" + item.product_id].Expires = DateTime.Now.AddDays(-10);
 
-                    // Cập nhật số lượng và số lượt mua của sản phẩm
                     var product = db.Products.SingleOrDefault(p => p.product_id == item.product_id);
-                    productquancheck = product.quantity; // Kiểm tra số lượng tồn kho
-                    product.buyturn += cart.Item2[i]; // Tăng số lượt mua
-                    product.quantity = (Convert.ToInt32(product.quantity ?? "0") - cart.Item2[i]).ToString(); // Giảm số lượng tồn kho
+                    productquancheck = product.quantity;
+                    product.buyturn += cart.Item2[i];
+                    product.quantity = (Convert.ToInt32(product.quantity ?? "0") - cart.Item2[i]).ToString();
 
-                    listProduct.Add(product); // Thêm sản phẩm vào danh sách để gửi email
-                    priceSum += (_price * cart.Item2[i]); // Cộng dồn giá trị sản phẩm
-
-                    // Chuẩn bị nội dung email (danh sách sản phẩm)
+                    listProduct.Add(product);
+                    priceSum += (_price * cart.Item2[i]);
                     orderItem += "<tr style='margin'> <td align='left' width='75%' style=' padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;' >" +
                                 product.product_name + "</td><td align='left' width='25%' style=' padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; ' >" + product.price.ToString("#,0₫", culture.NumberFormat) + "</td> </tr>";
                 }
 
-                // Kiểm tra số lượng tồn kho trước khi lưu đơn hàng
                 if (productquancheck.Trim() != "0")
                 {
-                    db.Orders.Add(order); // Thêm đơn hàng vào cơ sở dữ liệu
+                    db.Orders.Add(order);
                 }
                 else
                 {
-                    Notification.setNotification3s("Sản phẩm đã hết hàng", "error"); // Thông báo lỗi nếu sản phẩm hết hàng
-                    return RedirectToAction("ViewCart", "Cart"); // Chuyển hướng về giỏ hàng
+                    Notification.setNotification3s("Sản phẩm đã hết hàng", "error");
+                    return RedirectToAction("ViewCart", "Cart");
                 }
 
-                db.Configuration.ValidateOnSaveEnabled = false; // Tắt kiểm tra validation khi lưu (có thể gây lỗi nếu không cẩn thận)
+                db.Configuration.ValidateOnSaveEnabled = false;
+                await db.SaveChangesAsync();
+                Notification.setNotification3s("Đặt hàng thành công", "success");
+                Session.Remove("Discount");
+                Session.Remove("Discountcode");
 
-                await db.SaveChangesAsync(); // Lưu tất cả thay đổi vào cơ sở dữ liệu
-                Notification.setNotification3s("Đặt hàng thành công", "success"); // Thông báo thành công
-                Session.Remove("Discount"); // Xóa Session giảm giá
-                Session.Remove("Discountcode"); // Xóa Session mã giảm giá
-
-                // Chuẩn bị thông tin để gửi email
                 emailID = User.Identity.GetEmail();
                 orderID = order.order_id.ToString();
-                orderDiscount = (priceSum + 30000 - order.total).ToString("#,0₫", culture.NumberFormat); // Giá trị giảm giá
-                orderPrice = priceSum.ToString("#,0₫", culture.NumberFormat); // Tổng giá sản phẩm
-                orderTotal = order.total.ToString("#,0₫", culture.NumberFormat); // Tổng tiền cuối cùng
+                orderDiscount = string.Format(culture, "{0:#,0₫}", priceSum + 30000 - (order.total ?? 0));
+                orderPrice = priceSum.ToString("#,0₫", culture.NumberFormat);
+                orderTotal = order.total.HasValue ? order.total.Value.ToString("#,0₫", culture.NumberFormat) : "0₫";
 
-                // Gửi email xác nhận đơn hàng (hiện đang bị comment)
                 // SendVerificationLinkEmail(emailID, orderID, orderItem, orderDiscount, orderPrice, orderTotal, contentWard, district, province);
 
                 Notification.setNotification3s("Đặt hàng thành công", "success");
-                return RedirectToAction("TrackingOrder", "Account"); // Chuyển hướng đến trang theo dõi đơn hàng
+                return RedirectToAction("TrackingOrder", "Account");
             }
             catch
             {
-                Notification.setNotification3s("Lỗi! đặt hàng không thành công", "error"); // Thông báo lỗi nếu có ngoại lệ
-                return RedirectToAction("Checkout", "Cart"); // Chuyển hướng về trang thanh toán
+                Notification.setNotification3s("Lỗi! đặt hàng không thành công", "error");
+                return RedirectToAction("Checkout", "Cart");
             }
         }
 
         // Gửi email xác nhận đơn hàng
-        [NonAction] // Không phải action, chỉ là phương thức hỗ trợ
-        public void SendVerificationLinkEmail(string emailID, string orderID, string orderItem, string orderDiscount, string orderPrice, string orderTotal, string contentWard, string district, string province)
-        {
-            var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName); // Email gửi (cấu hình trong EmailConfig)
-            var toEmail = new MailAddress(emailID); // Email người nhận
-            var fromEmailPassword = EmailConfig.emailPassword; // Mật khẩu email gửi
-            string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "EmailOrders" + ".cshtml"); // Đọc template email từ file
-            string subject = "Thông tin đơn hàng #" + orderID; // Tiêu đề email
+        //[NonAction] // Không phải action, chỉ là phương thức hỗ trợ
+        //public void SendVerificationLinkEmail(string emailID, string orderID, string orderItem, string orderDiscount, string orderPrice, string orderTotal, string contentWard, string district, string province)
+        //{
+        //    var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName); // Email gửi (cấu hình trong EmailConfig)
+        //    var toEmail = new MailAddress(emailID); // Email người nhận
+        //    var fromEmailPassword = EmailConfig.emailPassword; // Mật khẩu email gửi
+        //    string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "EmailOrders" + ".cshtml"); // Đọc template email từ file
+        //    string subject = "Thông tin đơn hàng #" + orderID; // Tiêu đề email
 
-            // Thay thế các placeholder trong template email
-            body = body.Replace("{{order_id}}", orderID);
-            body = body.Replace("{{order_item}}", orderItem);
-            body = body.Replace("{{order_discount}}", orderDiscount);
-            body = body.Replace("{{order_price}}", orderPrice);
-            body = body.Replace("{{total}}", orderTotal);
-            body = body.Replace("{{contet_ward}}", contentWard);
-            body = body.Replace("{{district}}", district);
-            body = body.Replace("{{province}}", province);
+        //    // Thay thế các placeholder trong template email
+        //    body = body.Replace("{{order_id}}", orderID);
+        //    body = body.Replace("{{order_item}}", orderItem);
+        //    body = body.Replace("{{order_discount}}", orderDiscount);
+        //    body = body.Replace("{{order_price}}", orderPrice);
+        //    body = body.Replace("{{total}}", orderTotal);
+        //    body = body.Replace("{{contet_ward}}", contentWard);
+        //    body = body.Replace("{{district}}", district);
+        //    body = body.Replace("{{province}}", province);
 
-            // Cấu hình SMTP để gửi email
-            var smtp = new SmtpClient
-            {
-                Host = EmailConfig.emailHost, // Máy chủ SMTP (ví dụ: smtp.gmail.com)
-                Port = 587, // Cổng SMTP
-                EnableSsl = true, // Bật SSL
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
+        //    // Cấu hình SMTP để gửi email
+        //    var smtp = new SmtpClient
+        //    {
+        //        Host = EmailConfig.emailHost, // Máy chủ SMTP (ví dụ: smtp.gmail.com)
+        //        Port = 587, // Cổng SMTP
+        //        EnableSsl = true, // Bật SSL
+        //        DeliveryMethod = SmtpDeliveryMethod.Network,
+        //        UseDefaultCredentials = false,
+        //        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+        //    };
 
-            // Gửi email
-            using (var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true // Nội dung email là HTML
-            })
-                smtp.Send(message);
-        }
+        //    // Gửi email
+        //    using (var message = new MailMessage(fromEmail, toEmail)
+        //    {
+        //        Subject = subject,
+        //        Body = body,
+        //        IsBodyHtml = true // Nội dung email là HTML
+        //    })
+        //        smtp.Send(message);
+        //}
 
         // Áp dụng mã giảm giá
         public ActionResult UseDiscountCode(string code)
@@ -363,6 +349,132 @@ namespace DoAn_LapTrinhWeb.Controllers
             }
 
             return new Tuple<List<Product>, List<int>>(listProduct, quantities); // Trả về danh sách sản phẩm và số lượng
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> SaveOrderAndPay(OrderAddress orderAddress, string OrderNote)
+        {
+            try
+            {
+                var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                double priceSum = 0;
+                string productquancheck = "0";
+
+                if (!orderAddress.province_id.HasValue || !orderAddress.district_id.HasValue ||
+                    !orderAddress.ward_id.HasValue || string.IsNullOrEmpty(orderAddress.orderUsername) ||
+                    string.IsNullOrEmpty(orderAddress.orderPhonenumber) || string.IsNullOrEmpty(orderAddress.content))
+                {
+                    return Json(new { success = false, message = "Nhập thông tin còn thiếu" });
+                }
+
+                double discount = 0;
+                if (Session["Discount"] != null && Session["Discountcode"] != null)
+                {
+                    string check_discount = Session["Discountcode"].ToString();
+                    var discountupdatequan = db.Discounts.FirstOrDefault(d => d.discount_code == check_discount);
+                    if (discountupdatequan == null || discountupdatequan.quantity == 0 ||
+                        discountupdatequan.discount_star >= DateTime.Now || discountupdatequan.discount_end <= DateTime.Now)
+                    {
+                        return Json(new { success = false, message = "Mã giảm giá không thể sử dụng" });
+                    }
+                    discount = Convert.ToDouble(Session["Discount"].ToString());
+                    discountupdatequan.quantity--;
+                }
+
+                orderAddress.timesEdit = 0;
+                db.OrderAddresses.Add(orderAddress);
+                var cart = this.GetCart();
+                var listProduct = cart.Item1.ToList();
+
+                var order = new Order
+                {
+                    account_id = User.Identity.GetUserId(),
+                    create_at = DateTime.Now,
+                    create_by = User.Identity.GetUserId().ToString(),
+                    status = "1",
+                    order_note = OrderNote,
+                    delivery_id = 1,
+                    orderAddressId = orderAddress.orderAddressId,
+                    order_date = DateTime.Now,
+                    update_at = DateTime.Now,
+                    payment_id = 2,
+                    update_by = User.Identity.GetUserId().ToString(),
+                    total = (float?)Convert.ToDouble(TempData["Total"] ?? 0)
+                };
+
+                if (order.total <= 0)
+                {
+                    return Json(new { success = false, message = "Tổng tiền đơn hàng không hợp lệ" });
+                }
+
+                for (int i = 0; i < cart.Item1.Count; i++)
+                {
+                    var item = cart.Item1[i];
+                    var _price = item.price;
+                    if (item.Discount != null && item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
+                    {
+                        _price = item.price - item.Discount.discount_price;
+                    }
+
+                    order.Oder_Detail.Add(new Oder_Detail
+                    {
+                        create_at = DateTime.Now,
+                        create_by = User.Identity.GetUserId().ToString(),
+                        disscount_id = item.disscount_id,
+                        genre_id = item.genre_id,
+                        price = _price,
+                        product_id = item.product_id,
+                        quantity = cart.Item2[i],
+                        status = "1",
+                        update_at = DateTime.Now,
+                        update_by = User.Identity.GetUserId().ToString(),
+                        transection = "momo"
+                    });
+
+                    var product = db.Products.FirstOrDefault(p => p.product_id == item.product_id);
+                    productquancheck = product.quantity;
+                    product.buyturn += cart.Item2[i];
+                    product.quantity = (Convert.ToInt32(product.quantity ?? "0") - cart.Item2[i]).ToString();
+
+                    priceSum += (_price * cart.Item2[i]);
+                    Response.Cookies["product_" + item.product_id].Expires = DateTime.Now.AddDays(-10);
+                }
+
+                if (productquancheck.Trim() == "0")
+                {
+                    return Json(new { success = false, message = "Sản phẩm đã hết hàng" });
+                }
+
+                db.Orders.Add(order);
+                db.Configuration.ValidateOnSaveEnabled = false;
+                await db.SaveChangesAsync();
+
+                var orderInfoModel = new OrderInfoModel
+                {
+                    OrderId = order.order_id.ToString(),
+                    FullName = orderAddress.orderUsername,
+                    Amount = order.total.HasValue ? (long)order.total.Value : 0L,
+                    OrderInfo = $"Thanh toán đơn hàng #{order.order_id} qua MoMo"
+                };
+
+                System.Diagnostics.Debug.WriteLine($"OrderInfoModel: {JsonConvert.SerializeObject(orderInfoModel)}");
+
+                Session.Remove("Discount");
+                Session.Remove("Discountcode");
+
+                var momoResponse = await new MomoService().CreatePaymentAsync(orderInfoModel);
+                if (momoResponse.ErrorCode == 0 && !string.IsNullOrEmpty(momoResponse.PayUrl))
+                {
+                    return Json(new { success = true, redirectUrl = momoResponse.PayUrl });
+                }
+
+                return Json(new { success = false, message = $"Lỗi MoMo: {momoResponse.Message}" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Lỗi trong SaveOrderAndPay: {ex.Message}");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
         }
     }
 }

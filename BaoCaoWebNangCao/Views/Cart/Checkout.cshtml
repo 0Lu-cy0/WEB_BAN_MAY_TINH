@@ -57,71 +57,77 @@
 </style>
 
 @section scripts{
-    <script src="~/Scripts/UserJS/address-manager.js"></script> <!-- Script xử lý quản lý địa chỉ (thêm, chọn địa chỉ) -->
+    <script src="~/Scripts/UserJS/address-manager.js"></script>
     <script>
         $(document).ready(function () {
-            // Khởi tạo các modal
+            // Chọn địa chỉ khác
+            $('.select-address').click(function () {
+                var addressId = $(this).data('address-id');
+                var provinceId = $(this).data('province-id');
+                var districtId = $(this).data('district-id');
+                var wardId = $(this).data('ward-id');
+                var username = $(this).data('username');
+                var phone = $(this).data('phone');
+                var content = $(this).data('content');
+
+                $('#province_id').val(provinceId);
+                $('#district_id').val(districtId);
+                $('#ward_id').val(wardId);
+                $('#orderUsername').val(username);
+                $('#orderPhonenumber').val(phone);
+                $('#content').val(content);
+
+                $('#province').val(provinceId);
+                $('#district').val(districtId);
+                $('#ward').val(wardId);
+                $('#user-name').val(username);
+                $('#phone-number').val(phone);
+                $('#content').val(content);
+
+                $('#addressList').collapse('hide');
+            });
+
+            // Cập nhật ghi chú đơn hàng
+            $('textarea[name="OrderNote"]').on('input', function () {
+                $('#OrderNote').val($(this).val());
+            });
+
+            // Khởi tạo modal
             window.createmodal = $('#ModalCreate');
             window.editModal = $('#EditAddress');
             window.defaultmodal = $('#defaultModal');
             window.delmodal = $('#deleteModal');
 
-            // Khởi tạo các biến toàn cục
             window.ide = null;
             window.defaultID = null;
             window.idde = null;
 
-            // Hiển thị modal khi click nút thêm địa chỉ
+            // Hiển thị modal thêm địa chỉ
             $('#popupcreateaddress').click(function () {
                 var myobj = $('.nice-select');
                 myobj.remove();
                 createmodal.modal('show');
             });
 
-            // Đóng các modal khi click nút đóng
-            $('#closemodal').click(function () {
-                editModal.modal('hide');
-            });
-            $('#closemodal1').click(function () {
-                editModal.modal('hide');
-            });
-            $('#closemodal4').click(function () {
-                editModal2.modal('hide');
-            });
-            $('#closemodal5').click(function () {
-                editModal2.modal('hide');
-            });
-            $('#closemodal3').click(function () {
-                createmodal.modal('hide');
-            });
+            // Đóng modal
+            $('#closemodal').click(function () { editModal.modal('hide'); });
+            $('#closemodal1').click(function () { editModal.modal('hide'); });
+            $('#closemodal4').click(function () { editModal2.modal('hide'); });
+            $('#closemodal5').click(function () { editModal2.modal('hide'); });
+            $('#closemodal3').click(function () { createmodal.modal('hide'); });
+            $("#cancle-defalt").click(function () { defaultmodal.modal('hide'); });
+            $("#cancle_delete_address").click(function () { delmodal.modal('hide'); });
 
-            // Đóng modal đổi địa chỉ mặc định
-            $("#cancle-defalt").click(function () {
-                defaultmodal.modal('hide');
-            });
+            // Xử lý sửa, đặt mặc định, xóa địa chỉ
+            $('#confirmeditBtn').click(function () { handleEditAddress(); });
+            $('#btn-default-submit').click(function () { handleDefaultAddress(); });
+            $('#btndelete_address').click(function () { handleDeleteAddress(); });
 
-            // Đóng modal xóa địa chỉ
-            $("#cancle_delete_address").click(function () {
-                delmodal.modal('hide');
-            });
+            // Xử lý nút thanh toán MoMo
+            $('#save-order-momo').click(function (e) {
+                e.preventDefault();
+                console.log("Đang xử lý nút thanh toán MoMo");
 
-            // Xử lý khi click nút xác nhận sửa địa chỉ
-            $('#confirmeditBtn').click(function () {
-                handleEditAddress();
-            });
-
-            // Xử lý khi click nút xác nhận đổi địa chỉ mặc định
-            $('#btn-default-submit').click(function () {
-                handleDefaultAddress();
-            });
-
-            // Xử lý khi click nút xác nhận xóa địa chỉ
-            $('#btndelete_address').click(function () {
-                handleDeleteAddress();
-            });
-
-            // Kiểm tra thông tin trước khi lưu đơn hàng
-            $('#save-order').click(function () {
                 const provinceID = $('#province').val();
                 const districtID = $('#district').val();
                 const wardID = $('#ward').val();
@@ -129,29 +135,69 @@
                 const userPhoneNumber = $('#phone-number').val();
                 const content = $('#content').val();
 
-                if (provinceID == "" || districtID == "" || wardID == "" || userName == "" || userPhoneNumber == "" || content == "") {
-                    const Toast = Swal.mixin({
+                if (!provinceID || !districtID || !wardID || !userName || !userPhoneNumber || !content) {
+                    console.log("Thiếu các trường bắt buộc");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Nhập thông tin còn thiếu',
                         toast: true,
                         position: 'top',
                         showConfirmButton: false,
-                        timer: 3000,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer);
-                            toast.addEventListener('mouseleave', Swal.resumeTimer);
-                        }
+                        timer: 3000
                     });
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Nhập thông tin còn thiếu'
-                    });
-                    return false;
-                } else {
-                    $('#save-order').attr('type', 'submit');
+                    return;
                 }
+
+                console.log("Tất cả trường hợp lệ, đang gửi biểu mẫu");
+                $('#province_id').val(provinceID);
+                $('#district_id').val(districtID);
+                $('#ward_id').val(wardID);
+                $('#orderUsername').val(userName);
+                $('#orderPhonenumber').val(userPhoneNumber);
+                $('#content').val(content);
+
+                var $button = $(this);
+                $button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Đang xử lý...');
+
+                $.ajax({
+                    url: $('#momo-form').attr('action'),
+                    type: 'POST',
+                    data: $('#momo-form').serialize(),
+                    success: function (response) {
+                        console.log("Gửi biểu mẫu thành công");
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: response.message,
+                                toast: true,
+                                position: 'top',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            $button.prop('disabled', false).html('Đặt hàng với MoMo');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Lỗi khi gửi biểu mẫu: ", error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi khi gửi yêu cầu',
+                            text: xhr.responseText || 'Vui lòng thử lại',
+                            toast: true,
+                            position: 'top',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        $button.prop('disabled', false).html('Đặt hàng với MoMo');
+                    }
+                });
             });
         });
 
-        // Hàm hiển thị modal sửa địa chỉ
+        // Hàm modal
         window.EditAddress = function (id, username, phonenumber, province_id, district_id, ward_id, address_content) {
             var myobj = $('.nice-select');
             myobj.remove();
@@ -165,13 +211,11 @@
             editModal.modal('show');
         };
 
-        // Hàm hiển thị modal xác nhận đổi địa chỉ mặc định
         window.defaultConfirm = function (id) {
             defaultmodal.modal('show');
             defaultID = id;
         };
 
-        // Hàm hiển thị modal xác nhận xóa địa chỉ
         window.deleteConfirm = function (id) {
             delmodal.modal('show');
             idde = id;
@@ -206,190 +250,196 @@
     <div class="checkout-section">
         <div class="container">
             <div class="checkout_form" data-aos="fade-up" data-aos-delay="0">
-                <form method="post" action="@Url.Action("SaveOrder", "Cart")">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <h3>Thông tin nhận hàng</h3>
-                            <div class="row">
-                                @if (ViewBag.CountAddress > 0) // Nếu người dùng đã có địa chỉ
-                                {
-                                    <!-- Hiển thị form chọn địa chỉ -->
-                                    <div class="col-lg-12">
-                                        <label for="country" style="font-weight:500">Tỉnh/ Thành phố <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <select class="d-block form-select form-select-solid" name="province_id" id="province">
-                                                <option value="">Tỉnh/ Thành phố</option>
-                                                @foreach (var province in listProvince)
-                                                {
-                                                    <option @(province.province_id == myAddress.province_id ? "selected" : "") value="@province.province_id">@province.province_name</option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <label style="font-weight:500">Quận/ Huyện <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <select id="district" name="district_id" class="d-block form-select form-select-solid">
-                                                <option value="">Quận/ Huyện</option>
-                                                @foreach (var district in listDistrict)
-                                                {
-                                                    if (district.province_id == myAddress.province_id)
-                                                    {
-                                                        <option @(district.district_id == myAddress.district_id ? "selected" : "") value="@district.district_id">@district.type @district.district_name</option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <label style="font-weight:500">Phường/ Xã <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <select id="ward" name="ward_id" class="d-block form-select form-select-solid">
-                                                <option value="">Phường/ Xã</option>
-                                                @foreach (var ward in listWard)
-                                                {
-                                                    if (ward.district_id == myAddress.district_id)
-                                                    {
-                                                        <option @(ward.ward_id == myAddress.ward_id ? "selected" : "") value="@ward.ward_id">@ward.type @ward.ward_name</option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label style="font-weight:500">Họ tên người nhận <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <input type="text" id="user-name" name="orderUsername" value="@myAddress.accountUsername">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label style="font-weight:500">Số điện thoại <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <input type="number" min="1" id="phone-number" name="orderPhonenumber" value="@myAddress.accountPhoneNumber">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <label style="font-weight:500">Địa chỉ cụ thể <span class="text-danger">*</span></label>
-                                        <div class="default-form-box">
-                                            <input type="text" name="content" id="content" value="@myAddress.content">
-                                        </div>
-                                    </div>
-
-                                    <!-- Thay checkbox bằng phần tử nhấp để xổ danh sách địa chỉ -->
-                                    <div class="col-12 mt-3">
-                                        <div class="address-toggle" data-bs-toggle="collapse" data-bs-target="#addressList">
-                                            <span>Chọn địa chỉ khác</span>
-                                        </div>
-                                        <div class="collapse mt-2" id="addressList">
-                                            <div class="list-group">
-                                                @foreach (var address in listAddress.Where(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
-                                                {
-                                                    var province = listProvince.FirstOrDefault(p => p.province_id == address.province_id);
-                                                    var district = listDistrict.FirstOrDefault(d => d.district_id == address.district_id);
-                                                    var ward = listWard.FirstOrDefault(w => w.ward_id == address.ward_id);
-                                                    <button type="button" class="list-group-item list-group-item-action select-address"
-                                                            data-address-id="@address.account_address_id"
-                                                            data-province-id="@address.province_id"
-                                                            data-district-id="@address.district_id"
-                                                            data-ward-id="@address.ward_id"
-                                                            data-username="@address.accountUsername"
-                                                            data-phone="@address.accountPhoneNumber"
-                                                            data-content="@address.content">
-                                                        @address.accountUsername - @address.accountPhoneNumber, @address.content,
-                                                        @(ward != null ? ward.type + " " + ward.ward_name : ""), @(district != null ? district.type + " " + district.district_name : ""), @(province != null ? province.province_name : "")
-                                                    </button>
-                                                }
-                                                @if (!listAddress.Any(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
-                                                {
-                                                    <div class="text-muted p-2">Bạn chưa có địa chỉ nào khác.</div>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 mt-3">
-                                        <div class="order-notes">
-                                            <label for="OrderNote" style="font-weight:500">Ghi chú đơn hàng</label>
-                                            <textarea name="OrderNote" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: những lưu ý đặc biệt khi giao hàng."></textarea>
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <!-- Nếu chưa có địa chỉ, hiển thị nút mở modal để thêm địa chỉ -->
-                                    <div class="col-12 text-center">
-                                        <button style="margin-top: 20px; font-weight: 600; color: #FE8C23; font-size:19px;" id="popupcreateaddress" type="button">Thêm mới địa chỉ</button>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <h3>Đơn đặt hàng của bạn</h3>
-                            <div class="order_table table-responsive" style="overflow-x: hidden; border-left: 0.5px solid #0000001c; border-right: 0.5px solid #0000001c; border-top: 0.5px solid #0000001c;">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Sản Phẩm</th>
-                                            <th>Tổng Giá</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (int i = 0; i < listProduct.Count(); i++)
-                                        {
-                                            var item = listProduct.ElementAt(i);
-                                            var quan = quans[i];
-                                            var price2 = item.price;
-                                            int maxquantity = Int32.Parse(item.quantity);
-                                            if (item.Discount != null && item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <h3>Thông tin nhận hàng</h3>
+                        <div class="row">
+                            @if (ViewBag.CountAddress > 0) // Nếu người dùng đã có địa chỉ
+                            {
+                                <!-- Hiển thị form chọn địa chỉ -->
+                                <div class="col-lg-12">
+                                    <label for="country" style="font-weight:500">Tỉnh/ Thành phố <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <select class="d-block form-select form-select-solid" name="province_id" id="province">
+                                            <option value="">Tỉnh/ Thành phố</option>
+                                            @foreach (var province in listProvince)
                                             {
-                                                price2 = item.price - item.Discount.discount_price;
+                                                <option @(province.province_id == myAddress.province_id ? "selected" : "") value="@province.province_id">@province.province_name</option>
                                             }
-                                            <tr>
-                                                <td style="max-width:500px!important;">
-                                                    <a target="_blank" href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id">
-                                                        @item.product_name <strong style="color: #3674ab;"> × @quan</strong>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    @{
-                                                        double total3 = 0;
-                                                        total3 = price2 * quan;
-                                                    }
-                                                    <span>@total3.ToString("#,0₫", culture.NumberFormat)</span>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                    <tfoot style="font-weight:500">
-                                        <tr>
-                                            <th>Tạm tính</th>
-                                            <td>@price.ToString("#,0₫", culture.NumberFormat)</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Giảm giá</th>
-                                            <td>@discountPrice.ToString("#,0₫", culture.NumberFormat)</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phí vận chuyển</th>
-                                            <td>@shippingFee.ToString("#,0₫", culture.NumberFormat)</td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            <th>Thành tiền</th>
-                                            <td style="font-size:20px;color:rgb(235, 33, 1);">@total.ToString("#,0₫", culture.NumberFormat)</td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment_method">
-                                <div class="order_button d-flex justify-content-end">
-                                    <button class="btn btn-md btn-black-default-hover" id="save-order" type="button">
-                                        Đặt hàng ngay
-                                    </button>
+                                        </select>
+                                    </div>
                                 </div>
+                                <div class="col-12">
+                                    <label style="font-weight:500">Quận/ Huyện <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <select id="district" name="district_id" class="d-block form-select form-select-solid">
+                                            <option value="">Quận/ Huyện</option>
+                                            @foreach (var district in listDistrict)
+                                            {
+                                                if (district.province_id == myAddress.province_id)
+                                                {
+                                                    <option @(district.district_id == myAddress.district_id ? "selected" : "") value="@district.district_id">@district.type @district.district_name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label style="font-weight:500">Phường/ Xã <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <select id="ward" name="ward_id" class="d-block form-select form-select-solid">
+                                            <option value="">Phường/ Xã</option>
+                                            @foreach (var ward in listWard)
+                                            {
+                                                if (ward.district_id == myAddress.district_id)
+                                                {
+                                                    <option @(ward.ward_id == myAddress.ward_id ? "selected" : "") value="@ward.ward_id">@ward.type @ward.ward_name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label style="font-weight:500">Họ tên người nhận <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <input type="text" id="user-name" name="orderUsername" value="@myAddress.accountUsername">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label style="font-weight:500">Số điện thoại <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <input type="number" min="1" id="phone-number" name="orderPhonenumber" value="@myAddress.accountPhoneNumber">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label style="font-weight:500">Địa chỉ cụ thể <span class="text-danger">*</span></label>
+                                    <div class="default-form-box">
+                                        <input type="text" name="content" id="content" value="@myAddress.content">
+                                    </div>
+                                </div>
+
+                                <!-- Thay checkbox bằng phần tử nhấp để xổ danh sách địa chỉ -->
+                                <div class="col-12 mt-3">
+                                    <div class="address-toggle" data-bs-toggle="collapse" data-bs-target="#addressList">
+                                        <span>Chọn địa chỉ khác</span>
+                                    </div>
+                                    <div class="collapse mt-2" id="addressList">
+                                        <div class="list-group">
+                                            @foreach (var address in listAddress.Where(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
+                                            {
+                                                var province = listProvince.FirstOrDefault(p => p.province_id == address.province_id);
+                                                var district = listDistrict.FirstOrDefault(d => d.district_id == address.district_id);
+                                                var ward = listWard.FirstOrDefault(w => w.ward_id == address.ward_id);
+                                                <button type部分 type="button" class="list-group-item list-group-item-action select-address"
+                                                        data-address-id="@address.account_address_id"
+                                                        data-province-id="@address.province_id"
+                                                        data-district-id="@address.district_id"
+                                                        data-ward-id="@address.ward_id"
+                                                        data-username="@address.accountUsername"
+                                                        data-phone="@address.accountPhoneNumber"
+                                                        data-content="@address.content">
+                                                    @address.accountUsername - @address.accountPhoneNumber, @address.content,
+                                                    @(ward != null ? ward.type + " " + ward.ward_name : ""), @(district != null ? district.type + " " + district.district_name : ""), @(province != null ? province.province_name : "")
+                                                </button>
+                                            }
+                                            @if (!listAddress.Any(a => a.account_address_id != (myAddress != null ? myAddress.account_address_id : 0)))
+                                            {
+                                                <div class="text-muted p-2">Bạn chưa có địa chỉ nào khác.</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-3">
+                                    <div class="order-notes">
+                                        <label for="OrderNote" style="font-weight:500">Ghi chú đơn hàng</label>
+                                        <textarea name="OrderNote" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: những lưu ý đặc biệt khi giao hàng."></textarea>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <!-- Nếu chưa có địa chỉ, hiển thị nút mở modal để thêm địa chỉ -->
+                                <div class="col-12 text-center">
+                                    <button style="margin-top: 20px; font-weight: 600; color: #FE8C23; font-size:19px;" id="popupcreateaddress" type="button">Thêm mới địa chỉ</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h3>Đơn đặt hàng của bạn</h3>
+                        <div class="order_table table-responsive" style="overflow-x: hidden; border-left: 0.5px solid #0000001c; border-right: 0.5px solid #0000001c; border-top: 0.5px solid #0000001c;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th>Tổng Giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < listProduct.Count(); i++)
+                                    {
+                                        var item = listProduct.ElementAt(i);
+                                        var quan = quans[i];
+                                        var price2 = item.price;
+                                        int maxquantity = Int32.Parse(item.quantity);
+                                        if (item.Discount != null && item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now)
+                                        {
+                                            price2 = item.price - item.Discount.discount_price;
+                                        }
+                                        <tr>
+                                            <td style="max-width:500px!important;">
+                                                <a target="_blank" href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id">
+                                                    @item.product_name <strong style="color: #3674ab;"> × @quan</strong>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @{
+                                                    double total3 = 0;
+                                                    total3 = price2 * quan;
+                                                }
+                                                <span>@total3.ToString("#,0₫", culture.NumberFormat)</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot style="font-weight:500">
+                                    <tr>
+                                        <th>Tạm tính</th>
+                                        <td>@price.ToString("#,0₫", culture.NumberFormat)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giảm giá</th>
+                                        <td>@discountPrice.ToString("#,0₫", culture.NumberFormat)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phí vận chuyển</th>
+                                        <td>@shippingFee.ToString("#,0₫", culture.NumberFormat)</td>
+                                    </tr>
+                                    <tr class="order_total">
+                                        <th>Thành tiền</th>
+                                        <td style="font-size:20px;color:rgb(235, 33, 1);">@total.ToString("#,0₫", culture.NumberFormat)</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="payment_method">
+                            <div class="order_button d-flex justify-content-end">
+                                <form method="post" action="@Url.Action("SaveOrderAndPay", "Cart")" id="momo-form">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="orderUsername" id="orderUsername" value="@myAddress.accountUsername" />
+                                    <input type="hidden" name="orderPhonenumber" id="orderPhonenumber" value="@myAddress.accountPhoneNumber" />
+                                    <input type="hidden" name="province_id" id="province_id" value="@myAddress.province_id" />
+                                    <input type="hidden" name="district_id" id="district_id" value="@myAddress.district_id" />
+                                    <input type="hidden" name="ward_id" id="ward_id" value="@myAddress.ward_id" />
+                                    <input type="hidden" name="content" id="content" value="@myAddress.content" />
+                                    <input type="hidden" name="OrderNote" id="OrderNote" value="" />
+                                    <button class="btn btn-md btn-black-default-hover" id="save-order-momo" type="submit">Đặt hàng với MoMo</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -459,7 +509,7 @@
                     </div>
                     <div class="form-group">
                         <input type="checkbox" hidden name="isDefault" checked="checked" value="true" id="checkeddefault" />
-                        <input type="hidden" value="false" name="account_address_default" />
+                        <input type="hidden" value="false" name="accousave-order-momosave-order-momont_address_default" />
                     </div>
                     <div class="text-danger fs-14px mb-4">*Những mục đánh dấu màu đỏ là bắt buộc</div>
                     <div class="text-center custom-btn-address">

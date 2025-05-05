@@ -126,8 +126,8 @@
                                                 <a @(item.status == "3" ? "" : "btn-light-success") onclick="CompletedOpen(@item.order_id) " id="comlpleted_btn_@item.order_id" class="btn @(item.status == "3"? "btn-success" :"btn-light-success")">Hoàn thành</a>
                                             </div>
                                         </td>
-                                        <td>@item.total.ToString("#,0₫", culture.NumberFormat)</td>
-                                        <td>@item.oder_date.ToString("HH:mm dd-MM-yyyy")</td>
+                                        <td class="text-end">@String.Format(culture, "{0:#,0₫}", item.total)</td>
+                                        <td class="text-end">@(item.order_date.HasValue ? item.order_date.Value.ToString("HH:mm dd-MM-yyyy") : "N/A")</td>
                                         <!--begin::Action=-->
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

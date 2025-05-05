@@ -123,9 +123,9 @@
                                     <td>
                                         <a class="btn btn-danger" id="waiting_btn">Đã hủy</a>
                                     </td>
-                                    <td>@item.total.ToString("#,0₫", culture.NumberFormat)</td>
-                                    <td>@item.oder_date.ToString("HH:mm dd-MM-yyyy")</td>
-                                    <td>@item.update_at.ToString("HH:mm dd-MM-yyyy")</td>
+                                    <td>@String.Format(culture, "{0:#,0₫}", item.total)</td>
+                                    <td>@String.Format("{0:HH:mm dd-MM-yyyy}", item.order_date)</td>
+                                    <td>@String.Format("{0:HH:mm dd-MM-yyyy}", item.update_at)</td>
                                     <!--begin::Action=-->
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

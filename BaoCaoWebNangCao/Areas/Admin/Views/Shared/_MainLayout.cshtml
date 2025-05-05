@@ -258,7 +258,7 @@
                             </div>
                             <div class="menu-item">
                                 <a class="menu-link @(ViewContext.RouteData.Values["Controller"].ToString() == "LoginHistory" ? "active" : "")"
-                                   href="">
+                                   href="@Url.Action("Index","LoginHistory")">
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                         <span class="svg-icon svg-icon-2">

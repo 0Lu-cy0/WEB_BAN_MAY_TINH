@@ -120,7 +120,7 @@
                         </div>
                         <div class="cart_subtotal">
                             <p>Giảm giá</p>
-                            <p style="font-size:16px;" id="discount" class="cart_amount">@((total2 + 30000 - order.total).ToString("#,0₫", culture.NumberFormat))</p>
+                            <p style="font-size:16px;" id="discount" class="cart_amount">@String.Format(culture, "{0:#,0₫}", (total2 + 30000 - order.total))</p>
                         </div>
                         <div class="cart_subtotal ">
                             <p>Phí vận chuyển</p>
@@ -129,7 +129,7 @@
                         <hr />
                         <div class="cart_subtotal">
                             <p>Thành tiền</p>
-                            <p style="font-size: 20px; color: rgb(235, 33, 1);" class="cart_amount">@order.total.ToString("#,0₫", culture.NumberFormat)</p>
+                            <p style="font-size: 20px; color: rgb(235, 33, 1);" class="cart_amount">@String.Format(culture, "{0:#,0₫}", order.total)</p>
                         </div>
                     </div>
                 </div>

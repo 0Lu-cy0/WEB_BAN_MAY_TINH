@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -25,7 +24,8 @@ namespace DoAn_LapTrinhWeb.Controllers
     public class AccountController : Controller
     {
         private DbContext db = new DbContext();
-        //View đăng nhập
+
+        // View đăng nhập
         public ActionResult Login(string returnUrl)
         {
             if (String.IsNullOrEmpty(returnUrl) && Request.UrlReferrer != null && Request.UrlReferrer.ToString().Length > 0)
@@ -38,48 +38,69 @@ namespace DoAn_LapTrinhWeb.Controllers
             }
             return View();
         }
-        //Code xử lý đăng nhập
+
+        // Code xử lý đăng nhập
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModels model,string returnUrl)
+        public ActionResult Login(LoginViewModels model, string returnUrl)
         {
-            model.Password = Crypto.Hash(model.Password);
-            Account account = db.Accounts.FirstOrDefault(m => m.Email == model.Email && m.password == model.Password && m.status == "1");
-            if (account != null)
+            try
             {
-                LoggedUserData userData = new LoggedUserData
+                model.Password = Crypto.Hash(model.Password);
+                Account account = db.Accounts.FirstOrDefault(m => m.Email == model.Email && m.password == model.Password && m.status == "1");
+                if (account != null)
                 {
-                    UserId = account.account_id,
-                    Name = account.Name,
-                    Email = account.Email,
-                    RoleCode = account.Role,
-                    Avatar = account.Avatar
-                };
-                Notification.setNotification1_5s("Đăng nhập thành công", "suc;cess");
-                FormsAuthentication.SetAuthCookie(JsonConvert.SerializeObject(userData), false);
+                    LoggedUserData userData = new LoggedUserData
+                    {
+                        UserId = account.account_id,
+                        Name = account.Name,
+                        Email = account.Email,
+                        RoleCode = account.Role,
+                        Avatar = account.Avatar
+                    };
+                    Notification.setNotification1_5s("Đăng nhập thành công", "success");
+                    FormsAuthentication.SetAuthCookie(JsonConvert.SerializeObject(userData), false);
+                    if (!String.IsNullOrEmpty(returnUrl))
+                        return Redirect(returnUrl);
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+                Notification.setNotification3s("Email, mật khẩu không đúng, hoặc tài khoản bị vô hiệu hóa", "error");
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi đăng nhập", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return View(model);
+            }
+        }
+
+        // Đăng xuất tài khoản
+        public ActionResult Logout(string returnUrl)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(returnUrl) && Request.UrlReferrer != null && Request.UrlReferrer.ToString().Length > 0)
+                {
+                    return RedirectToAction("Logout", new { returnUrl = Request.UrlReferrer.ToString() });
+                }
+                FormsAuthentication.SignOut();
+                Notification.setNotification1_5s("Đăng xuất thành công", "success");
                 if (!String.IsNullOrEmpty(returnUrl))
                     return Redirect(returnUrl);
                 else
                     return RedirectToAction("Index", "Home");
             }
-            Notification.setNotification3s("Email, mật khẩu không đúng, hoặc tài khoản bị vô hiệu hóa", "error");
-            return View(model);
-        }
-        //Đăng xuất tài khoản
-        public ActionResult Logout(string returnUrl)
-        {
-            if (String.IsNullOrEmpty(returnUrl) && Request.UrlReferrer != null && Request.UrlReferrer.ToString().Length > 0)
+            catch (Exception ex)
             {
-                return RedirectToAction("Logout", new { returnUrl = Request.UrlReferrer.ToString() });//tạo url khi đăng xuất, đăng xuất thành công thì quay lại trang trước đó
-            }
-            FormsAuthentication.SignOut();
-            Notification.setNotification1_5s("Đăng xuất thành công", "success");
-            if (!String.IsNullOrEmpty(returnUrl))
-                return Redirect(returnUrl);
-            else
+                Notification.setNotification3s("Lỗi khi đăng xuất", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
                 return RedirectToAction("Index", "Home");
+            }
         }
-        //View đăng ký
+
+        // View đăng ký
         public ActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
@@ -89,41 +110,52 @@ namespace DoAn_LapTrinhWeb.Controllers
             ViewBag.Fail = string.Empty;
             return View();
         }
-        //Code xử lý đăng ký
-       [HttpPost]
+
+        // Code xử lý đăng ký
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModels model,Account account)
+        public ActionResult Register(RegisterViewModels model, Account account)
         {
-            string fail = "";
-            string success = "";
-            var checkemail = db.Accounts.Any(m => m.Email == model.Email);
-            if (checkemail)
+            try
             {
-                fail = "email đã được sử dụng";
+                string fail = "";
+                string success = "";
+                var checkemail = db.Accounts.Any(m => m.Email == model.Email);
+                if (checkemail)
+                {
+                    fail = "Email đã được sử dụng";
+                    ViewBag.Fail = fail;
+                    return View();
+                }
+                account.Role = Const.ROLE_MEMBER_CODE;
+                account.status = "1";
+                account.Role = 1;
+                account.Email = model.Email;
+                account.create_by = model.Email;
+                account.update_by = model.Email;
+                account.Name = model.Name;
+                account.Phone = model.PhoneNumber;
+                account.update_at = DateTime.Now;
+                account.Avatar = "/Content/Images/logo/icon.png";
+                db.Configuration.ValidateOnSaveEnabled = false;
+                account.password = Crypto.Hash(model.Password);
+                account.create_at = DateTime.Now;
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                success = "<script>alert('Đăng ký thành công');</script>";
+                ViewBag.Success = success;
                 ViewBag.Fail = fail;
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi đăng ký", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
                 return View();
             }
-            account.Role = Const.ROLE_MEMBER_CODE; //admin quyền là 0: thành viên quyền là 1             
-            account.status = "1";
-            account.Role = 1;
-            account.Email = model.Email;
-            account.create_by = model.Email;
-            account.update_by = model.Email;
-            account.Name = model.Name;
-            account.Phone = model.PhoneNumber;
-            account.update_at = DateTime.Now;
-            account.Avatar = "/Content/Images/logo/icon.png";
-            db.Configuration.ValidateOnSaveEnabled = false;
-            account.password = Crypto.Hash(model.Password); //mã hoá password
-            account.create_at = DateTime.Now; //thời gian tạo tạo khoản
-            db.Accounts.Add(account);
-            db.SaveChanges(); //add dữ liệu vào database
-            success = "<script>alert('Đăng ký thành công');</script>";
-            ViewBag.Success = success;
-            ViewBag.Fail = fail;
-            return RedirectToAction("Login","Account");
         }
-        //View quên mật khẩu
+
+        // View quên mật khẩu
         public ActionResult ForgotPassword()
         {
             if (User.Identity.IsAuthenticated)
@@ -132,151 +164,215 @@ namespace DoAn_LapTrinhWeb.Controllers
             }
             return View();
         }
-        //Code xử lý quên mật khẩu
+
+        // Code xử lý quên mật khẩu
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModels model)
         {
-            Account account = db.Accounts.Where(m => m.Email == model.Email).FirstOrDefault(); // kiểm tra email đã trùng với email đăng ký tài khoản chưa, nếu chưa đăng ký sẽ trả về fail
-            if (account != null)
+            try
             {
-                //Send email for reset password
-                string resetCode = Guid.NewGuid().ToString();
-                SendVerificationLinkEmail(account.Email, resetCode); // gửi code reset đến mail đã nhập ở form quên mật khẩu , kèm code resetpass,  tên tiêu đề gửi
-                string sendmail = account.Email;
-                account.Requestcode = resetCode; //request code phải giống reset code         
-                db.Configuration.ValidateOnSaveEnabled = false; // tắt validdation
-                db.SaveChanges();
-                Notification.setNotification5s("Đường dẫn reset password đã được gửi, vui lòng kiểm tra email", "success");
-            }
-            else
-            {
-                Notification.setNotification1_5s("Email chưa tồn tại trong hệ thống", "error");
-            }
-            return View(model);
-        }
-        //View cập nhật mật khẩu
-        public ActionResult Resetpassword(string id)
-        {
-            var user = db.Accounts.Where(a => a.Requestcode == id).FirstOrDefault();
-            if (user != null && !User.Identity.IsAuthenticated)
-            {
-                ResetPasswordViewModels model = new ResetPasswordViewModels();
-                model.ResetCode = id;
+                Account account = db.Accounts.Where(m => m.Email == model.Email).FirstOrDefault();
+                if (account != null)
+                {
+                    string resetCode = Guid.NewGuid().ToString();
+                    SendVerificationLinkEmail(account.Email, resetCode);
+                    account.Requestcode = resetCode;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    Notification.setNotification5s("Đường dẫn reset password đã được gửi, vui lòng kiểm tra email", "success");
+                }
+                else
+                {
+                    Notification.setNotification1_5s("Email chưa tồn tại trong hệ thống", "error");
+                }
                 return View(model);
             }
-            else
+            catch (Exception ex)
             {
+                Notification.setNotification3s("Lỗi khi gửi yêu cầu reset mật khẩu", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return View(model);
+            }
+        }
+
+        // View cập nhật mật khẩu
+        public ActionResult Resetpassword(string id)
+        {
+            try
+            {
+                var user = db.Accounts.Where(a => a.Requestcode == id).FirstOrDefault();
+                if (user != null && !User.Identity.IsAuthenticated)
+                {
+                    ResetPasswordViewModels model = new ResetPasswordViewModels();
+                    model.ResetCode = id;
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi tải trang reset mật khẩu", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
                 return RedirectToAction("Index", "Home");
             }
         }
-        //Code xử lý cập nhật mật khẩu
+
+        // Code xử lý cập nhật mật khẩu
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordViewModels model)
         {
-                var user = db.Accounts.Where(m => m.Requestcode == model.ResetCode).FirstOrDefault();
-            if (user != null)
+            try
             {
-                user.password = Crypto.Hash(model.NewPassword);
-                //sau khi đổi mật khẩu thành công khi quay lại link cũ thì sẽ không đôi được mật khẩu nữa 
-                user.Requestcode = "";
-                user.update_by = user.Email;
-                user.update_at = DateTime.Now;
-                user.status = "1";
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                Notification.setNotification1_5s("Cập nhật mật khẩu thành công", "success");
-                return RedirectToAction("Login");
+                var user = db.Accounts.Where(m => m.Requestcode == model.ResetCode).FirstOrDefault();
+                if (user != null)
+                {
+                    user.password = Crypto.Hash(model.NewPassword);
+                    user.Requestcode = "";
+                    user.update_by = user.Email;
+                    user.update_at = DateTime.Now;
+                    user.status = "1";
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    Notification.setNotification1_5s("Cập nhật mật khẩu thành công", "success");
+                    return RedirectToAction("Login");
+                }
+                Notification.setNotification3s("Mã reset không hợp lệ", "error");
+                return View(model);
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi cập nhật mật khẩu", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return View(model);
+            }
         }
-        //Gửi Email quên mật khẩu
+
+        // Gửi Email quên mật khẩu
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
         {
-            var verifyUrl = "/Account/ResetPassword/" + activationCode;
-            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
-            var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName); 
-            var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = EmailConfig.emailPassword; //có thể thay bằng mật khẩu gmail của bạn
-            string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "ResetPassword" + ".cshtml"); //dùng body mail html , file template nằm trong thư mục "EmailTemplate/Text.cshtml"
-            string subject = "Cập nhật mật khẩu mới";
-            body = body.Replace("{{viewBag.Confirmlink}}", link); //hiển thị nội dung lên form html
-            body = body.Replace("{{viewBag.Confirmlink}}", Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl));//hiển thị nội dung lên form html
-            var smtp = new SmtpClient
+            try
             {
-                Host = EmailConfig.emailHost, 
-                Port = 587,
-                EnableSsl = true, //bật ssl
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
+                var verifyUrl = "/Account/ResetPassword/" + activationCode;
+                var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+                var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName);
+                var toEmail = new MailAddress(emailID);
+                var fromEmailPassword = EmailConfig.emailPassword;
+                string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "ResetPassword" + ".cshtml");
+                string subject = "Cập nhật mật khẩu mới";
+                body = body.Replace("{{viewBag.Confirmlink}}", link);
+                var smtp = new SmtpClient
+                {
+                    Host = EmailConfig.emailHost,
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                };
 
-            using (var message = new MailMessage(fromEmail, toEmail)
+                using (var message = new MailMessage(fromEmail, toEmail)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                    smtp.Send(message);
+            }
+            catch (Exception ex)
             {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            })
-                smtp.Send(message);
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+            }
         }
-        //View cập nhật thông tin cá nhân
-        [Authorize]     // Đăng nhập mới có thể truy cập
+
+        // View cập nhật thông tin cá nhân
+        [Authorize]
         public ActionResult Editprofile()
         {
-            var userId = User.Identity.GetUserId();
-            var user = db.Accounts.Where(u => u.account_id == userId).FirstOrDefault();
-            if (user != null)
+            try
             {
-                return View(user);
+                var userId = User.Identity.GetUserId();
+                var user = db.Accounts.Where(u => u.account_id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    return View(user);
+                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi tải thông tin cá nhân", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return RedirectToAction("Index", "Home");
+            }
         }
-        //Code xử lý cập nhật thông tin cá nhân
-        [Authorize]// Đăng nhập mới có thể truy cập
-        public JsonResult UpdateProfile(string userName,string phoneNumber)
+
+        // Code xử lý cập nhật thông tin cá nhân
+        [Authorize]
+        public JsonResult UpdateProfile(string userName, string phoneNumber)
         {
-            bool result = false;
-            var userId = User.Identity.GetUserId();
-            var account = db.Accounts.Where(m => m.account_id == userId).FirstOrDefault();
-            if (account != null)
+            try
             {
-                account.account_id = userId;
-                account.Name = userName;
-                account.Phone = phoneNumber;
-                account.update_by = userId.ToString();
-                account.update_at = DateTime.Now;
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                result = true;
-                return Json(result, JsonRequestBehavior.AllowGet);
+                bool result = false;
+                var userId = User.Identity.GetUserId();
+                var account = db.Accounts.Where(m => m.account_id == userId).FirstOrDefault();
+                if (account != null)
+                {
+                    account.account_id = userId;
+                    account.Name = userName;
+                    account.Phone = phoneNumber;
+                    account.update_by = userId.ToString();
+                    account.update_at = DateTime.Now;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    result = true;
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Json(result, JsonRequestBehavior.AllowGet);
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
-        //Cập nhật ảnh đại diện
+
+        // Cập nhật ảnh đại diện
         public JsonResult UpdateAvatar()
         {
-            var userId = User.Identity.GetUserId();
-            var account = db.Accounts.Where(m => m.account_id == userId).FirstOrDefault();
-            HttpPostedFileBase file = Request.Files[0];
-            if (file != null)
+            try
             {
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                var extension = Path.GetExtension(file.FileName);
-                fileName = fileName + extension;
-                account.Avatar = "/Content/Images/"+ fileName;
-                file.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/"), fileName));
-                db.Configuration.ValidateOnSaveEnabled = false;
-                account.update_at = DateTime.Now;
-                db.SaveChanges();
+                var userId = User.Identity.GetUserId();
+                var account = db.Accounts.Where(m => m.account_id == userId).FirstOrDefault();
+                HttpPostedFileBase file = Request.Files[0];
+                if (file != null)
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    var extension = Path.GetExtension(file.FileName);
+                    fileName = fileName + extension;
+                    account.Avatar = "/Content/Images/" + fileName;
+                    file.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/"), fileName));
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    account.update_at = DateTime.Now;
+                    db.SaveChanges();
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return Json(JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
-        //View thay đổi mật khẩu
+
+        // View thay đổi mật khẩu
         public ActionResult ChangePassword()
         {
             if (!User.Identity.IsAuthenticated)
@@ -285,63 +381,85 @@ namespace DoAn_LapTrinhWeb.Controllers
             }
             return View();
         }
-        //Code xử lý Thay đổi mật khẩu
+
+        // Code xử lý Thay đổi mật khẩu
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordViewModels model)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                int userID = User.Identity.GetUserId();
-                model.NewPassword = Crypto.Hash(model.NewPassword);
-                Account account = db.Accounts.FirstOrDefault(m=>m.account_id== userID);
-                if (model.NewPassword == account.password)
-                {
-                    Notification.setNotification3s("Mật khẩu mới và cũ không được trùng!", "error");
-                    return View(model);
-                }
-                account.update_at = DateTime.Now;
-                account.update_by = User.Identity.GetEmail();
-                account.password = model.NewPassword;
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.Entry(account).State = EntityState.Modified;
-                db.SaveChanges();
-                Notification.setNotification3s("Đổi mật khẩu thành công", "success");
-                return RedirectToAction("ChangePassword", "Account");
-            }
-            return View(model);
-        }
-        //Quản lý sổ địa chỉ
-        public ActionResult Address()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                int userID = User.Identity.GetUserId();
-                var address = db.AccountAddresses.Where(m => m.account_id == userID).ToList();
-                ViewBag.Check_address = db.AccountAddresses.Where(m => m.account_id == userID).Count();
-                ViewBag.ProvincesList = db.Provinces.OrderBy(m => m.province_name).ToList();
-                ViewBag.DistrictsList = db.Districts.OrderBy(m => m.type).ThenBy(m => m.district_name).ToList();
-                ViewBag.WardsList = db.Wards.OrderBy(m => m.type).ThenBy(m => m.ward_name).ToList();
-                return View(address);
-            }
-            return RedirectToAction("Index", "Home");
-        }
-        //Thêm mới địa chỉ 
-        public ActionResult AddressCreate(AccountAddress address)
-        {
-            bool result = false;
-            var userid = User.Identity.GetUserId();
-            var checkdefault = db.AccountAddresses.Where(m => m.account_id == userid).ToList();
-            var limit_address = db.AccountAddresses.Where(m => m.account_id == userid).ToList();
             try
             {
-                if (limit_address.Count() == 4)//tối đa 4 ký tự
+                if (User.Identity.IsAuthenticated)
                 {
+                    int userID = User.Identity.GetUserId();
+                    model.NewPassword = Crypto.Hash(model.NewPassword);
+                    Account account = db.Accounts.FirstOrDefault(m => m.account_id == userID);
+                    if (model.NewPassword == account.password)
+                    {
+                        Notification.setNotification3s("Mật khẩu mới và cũ không được trùng!", "error");
+                        return View(model);
+                    }
+                    account.update_at = DateTime.Now;
+                    account.update_by = User.Identity.GetEmail();
+                    account.password = model.NewPassword;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.Entry(account).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Notification.setNotification3s("Đổi mật khẩu thành công", "success");
+                    return RedirectToAction("ChangePassword", "Account");
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi đổi mật khẩu", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return View(model);
+            }
+        }
+
+        // Quản lý sổ địa chỉ
+        public ActionResult Address()
+        {
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    int userID = User.Identity.GetUserId();
+                    var address = db.AccountAddresses.Where(m => m.account_id == userID).ToList();
+                    ViewBag.Check_address = db.AccountAddresses.Where(m => m.account_id == userID).Count();
+                    ViewBag.ProvincesList = db.Provinces.OrderBy(m => m.province_name).ToList();
+                    ViewBag.DistrictsList = db.Districts.OrderBy(m => m.type).ThenBy(m => m.district_name).ToList();
+                    ViewBag.WardsList = db.Wards.OrderBy(m => m.type).ThenBy(m => m.ward_name).ToList();
+                    return View(address);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi tải danh sách địa chỉ", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        // Thêm mới địa chỉ 
+        public ActionResult AddressCreate(AccountAddress address)
+        {
+            try
+            {
+                bool result = false;
+                var userid = User.Identity.GetUserId();
+                var checkdefault = db.AccountAddresses.Where(m => m.account_id == userid).ToList();
+                var limit_address = db.AccountAddresses.Where(m => m.account_id == userid).ToList();
+                if (limit_address.Count() == 4)
+                {
+                    Notification.setNotification3s("Đã đạt giới hạn 4 địa chỉ", "error");
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 foreach (var item in checkdefault)
                 {
-                    if (item.isDefault == true && address.isDefault == true)
+                    if (item.isDefault && address.isDefault)
                     {
                         item.isDefault = false;
                         db.SaveChanges();
@@ -351,152 +469,385 @@ namespace DoAn_LapTrinhWeb.Controllers
                 db.AccountAddresses.Add(address);
                 db.SaveChanges();
                 result = true;
-                Notification.setNotification1_5s("Thêm thành công", "success");
+                Notification.setNotification1_5s("Thêm địa chỉ thành công", "success");
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception ex)
             {
-                return Json(result, JsonRequestBehavior.AllowGet);
+                Notification.setNotification3s("Lỗi khi thêm địa chỉ", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
-        //Sửa địa chỉ
+
+        // Sửa địa chỉ
         [HttpPost]
         public JsonResult AddressEdit(int id, string username, string phonenumber, int province_id, int district_id, int ward_id, string address_content)
         {
-            var address = db.AccountAddresses.FirstOrDefault(m => m.account_address_id == id);
-            bool result;
-            if (address != null)
-            {
-                address.province_id = province_id;
-                address.accountUsername = username;
-                address.accountPhoneNumber = phonenumber;
-                address.district_id = district_id;
-                address.ward_id = ward_id;
-                address.content = address_content;
-                address.account_id = User.Identity.GetUserId();
-                db.SaveChanges();
-                result = true;               
-            }
-            else
-            {
-                result = false;
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        //Thay đổi địa chỉ mặc định
-        public JsonResult DefaultAddress(int id)
-        {
-            bool result = false;
-            var userid = User.Identity.GetUserId();
-            var address = db.AccountAddresses.FirstOrDefault(m => m.account_address_id == id);
-            var checkdefault = db.AccountAddresses.ToList();
-            if (User.Identity.IsAuthenticated && !address.isDefault==true)
-            {
-                foreach (var item in checkdefault)
-                {
-                    if (item.isDefault == true && item.account_id == userid)
-                    {
-                        item.isDefault = false;
-                        db.SaveChanges();
-                    }
-                }
-                address.isDefault = true;
-                db.SaveChanges();
-                result = true;
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-        }
-        //Xóa địa chỉ
-        [HttpPost]
-        public JsonResult AddressDelete(int id)
-        {
-            bool result = false;
             try
             {
                 var address = db.AccountAddresses.FirstOrDefault(m => m.account_address_id == id);
-                db.AccountAddresses.Remove(address);
-                db.SaveChanges();
-                result = true;
+                bool result;
+                if (address != null)
+                {
+                    address.province_id = province_id;
+                    address.accountUsername = username;
+                    address.accountPhoneNumber = phonenumber;
+                    address.district_id = district_id;
+                    address.ward_id = ward_id;
+                    address.content = address_content;
+                    address.account_id = User.Identity.GetUserId();
+                    db.SaveChanges();
+                    result = true;
+                    Notification.setNotification1_5s("Cập nhật địa chỉ thành công", "success");
+                }
+                else
+                {
+                    result = false;
+                    Notification.setNotification3s("Không tìm thấy địa chỉ", "error");
+                }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception ex)
             {
-                return Json(result, JsonRequestBehavior.AllowGet);
-
+                Notification.setNotification3s("Lỗi khi cập nhật địa chỉ", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
-        //lấy danh sách quận huyện
+
+        // Thay đổi địa chỉ mặc định
+        public JsonResult DefaultAddress(int id)
+        {
+            try
+            {
+                bool result = false;
+                var userid = User.Identity.GetUserId();
+                var address = db.AccountAddresses.FirstOrDefault(m => m.account_address_id == id);
+                var checkdefault = db.AccountAddresses.ToList();
+                if (User.Identity.IsAuthenticated && !address.isDefault)
+                {
+                    foreach (var item in checkdefault)
+                    {
+                        if (item.isDefault && item.account_id == userid)
+                        {
+                            item.isDefault = false;
+                            db.SaveChanges();
+                        }
+                    }
+                    address.isDefault = true;
+                    db.SaveChanges();
+                    result = true;
+                    Notification.setNotification1_5s("Đặt địa chỉ mặc định thành công", "success");
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    Notification.setNotification3s("Không thể đặt địa chỉ mặc định", "error");
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi đặt địa chỉ mặc định", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // Xóa địa chỉ
+        [HttpPost]
+        public JsonResult AddressDelete(int id)
+        {
+            try
+            {
+                var address = db.AccountAddresses.FirstOrDefault(m => m.account_address_id == id);
+                bool result = false;
+                if (address != null)
+                {
+                    db.AccountAddresses.Remove(address);
+                    db.SaveChanges();
+                    result = true;
+                    Notification.setNotification1_5s("Xóa địa chỉ thành công", "success");
+                }
+                else
+                {
+                    Notification.setNotification3s("Không tìm thấy địa chỉ", "error");
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi xóa địa chỉ", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // Lấy danh sách quận huyện
         public JsonResult GetDistrictsList(int province_id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<Districts> districtslist = db.Districts.Where(m => m.province_id == province_id).OrderBy(m => m.type).ThenBy(m => m.district_name).ToList();
-            return Json(districtslist, JsonRequestBehavior.AllowGet);
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                List<Districts> districtslist = db.Districts.Where(m => m.province_id == province_id).OrderBy(m => m.type).ThenBy(m => m.district_name).ToList();
+                return Json(districtslist, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(new List<Districts>(), JsonRequestBehavior.AllowGet);
+            }
         }
-        //lấy danh sách phường xã
+
+        // Lấy danh sách phường xã
         public JsonResult GetWardsList(int district_id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<Wards> wardslist = db.Wards.Where(m => m.district_id == district_id).OrderBy(m => m.type).ThenBy(m => m.ward_name).ToList();
-            return Json(wardslist, JsonRequestBehavior.AllowGet);
-        }
-        //Lịch sử mua hàng
-        public ActionResult TrackingOrder(int? page)
-        {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                return View("TrackingOrder", GetOrder(page));
+                db.Configuration.ProxyCreationEnabled = false;
+                List<Wards> wardslist = db.Wards.Where(m => m.district_id == district_id).OrderBy(m => m.type).ThenBy(m => m.ward_name).ToList();
+                return Json(wardslist, JsonRequestBehavior.AllowGet);
             }
-            else
+            catch (Exception ex)
             {
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(new List<Wards>(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // Lịch sử mua hàng
+        public ActionResult TrackingOrder(int? page, string status = null, string orderId = null)
+        {
+            try
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                var userId = User.Identity.GetUserId();
+                if (userId == 0)
+                {
+                    Notification.setNotification3s("Không thể xác định người dùng", "error");
+                    return RedirectToAction("Index", "Home");
+                }
+                return View("TrackingOrder", GetOrder(page, status, orderId));
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Đã xảy ra lỗi khi tải lịch sử mua hàng", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
                 return RedirectToAction("Index", "Home");
             }
         }
-        //Chi tiết đơn hàng đã mua
+
+        // Chi tiết đơn hàng đã mua
         public ActionResult TrackingOrderDetail(int id)
         {
-            List<Oder_Detail> order = db.Oder_Detail.Where(m => m.order_id == id).ToList();
-            ViewBag.Order = db.Orders.FirstOrDefault(m => m.order_id == id);
-            ViewBag.OrderID = id;
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                return View(order);
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                var userId = User.Identity.GetUserId();
+                var order = db.Orders.FirstOrDefault(o => o.order_id == id && o.account_id == userId);
+                if (order == null)
+                {
+                    Notification.setNotification3s("Không tìm thấy đơn hàng", "error");
+                    return RedirectToAction("TrackingOrder");
+                }
+                List<Oder_Detail> orderDetails = db.Oder_Detail.Where(m => m.order_id == id).ToList();
+                ViewBag.Order = order;
+                ViewBag.OrderID = id;
+                return View(orderDetails);
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index", "Home");
+                Notification.setNotification3s("Lỗi khi tải chi tiết đơn hàng", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return RedirectToAction("TrackingOrder");
             }
         }
 
-        //đánh số trang
-        private IPagedList GetOrder(int? page)
+        // Hủy đơn hàng
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelOrder(int id)
         {
-            var userId = User.Identity.GetUserId();
-            int pageSize = 10;
-            int pageNumber = (page ?? 1); //đánh số trang
-            var list = db.Orders.Where(m => m.account_id == userId).OrderByDescending(m => m.order_id)
-                .ToPagedList(pageNumber, pageSize);
-            return list;
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var order = db.Orders.FirstOrDefault(o => o.order_id == id && o.account_id == userId && o.status == "1");
+                if (order == null)
+                {
+                    Notification.setNotification3s("Không tìm thấy đơn hàng hoặc không thể hủy", "error");
+                    return RedirectToAction("TrackingOrder");
+                }
+                order.status = "0";
+                order.update_at = DateTime.Now;
+                order.update_by = User.Identity.GetEmail();
+                db.SaveChanges();
+                Notification.setNotification1_5s("Hủy đơn hàng thành công", "success");
+                return RedirectToAction("TrackingOrder");
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi hủy đơn hàng", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return RedirectToAction("TrackingOrder");
+            }
         }
 
+        // Mua lại đơn hàng
+        [HttpGet]
+        public ActionResult ReOrder(int id)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var order = db.Orders.Include(o => o.Oder_Detail).FirstOrDefault(o => o.order_id == id && o.account_id == userId);
+                if (order == null)
+                {
+                    Notification.setNotification3s("Không tìm thấy đơn hàng", "error");
+                    return RedirectToAction("TrackingOrder");
+                }
+
+                int successCount = 0;
+                foreach (var detail in order.Oder_Detail)
+                {
+                    var product = db.Products.SingleOrDefault(p => p.product_id == detail.product_id && p.status == "1");
+                    if (product != null && Convert.ToInt32(product.quantity) >= detail.quantity)
+                    {
+                        AddToCart(detail.product_id, detail.quantity);
+                        successCount++;
+                    }
+                }
+
+                if (successCount == order.Oder_Detail.Count)
+                {
+                    Notification.setNotification1_5s("Đã thêm tất cả sản phẩm vào giỏ hàng", "success");
+                }
+                else if (successCount > 0)
+                {
+                    Notification.setNotification3s($"Đã thêm {successCount}/{order.Oder_Detail.Count} sản phẩm vào giỏ hàng. Một số sản phẩm không khả dụng.", "warning");
+                }
+                else
+                {
+                    Notification.setNotification3s("Không thể thêm sản phẩm nào vào giỏ hàng do hết hàng hoặc không khả dụng", "error");
+                }
+                return RedirectToAction("ViewCart", "Cart");
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi mua lại đơn hàng", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return RedirectToAction("TrackingOrder");
+            }
+        }
+
+        // Lấy danh sách đơn hàng
+        private IPagedList GetOrder(int? page, string status, string orderId)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                if (userId == 0)
+                {
+                    return new List<Order>().ToPagedList(1, 10);
+                }
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                var orders = db.Orders.Include(o => o.Oder_Detail).Where(m => m.account_id == userId);
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    orders = orders.Where(o => o.status == status);
+                }
+
+                if (!string.IsNullOrEmpty(orderId) && int.TryParse(orderId, out int id))
+                {
+                    orders = orders.Where(o => o.order_id == id);
+                }
+
+                var list = orders.OrderByDescending(m => m.order_id).ToPagedList(pageNumber, pageSize);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return new List<Order>().ToPagedList(1, 10);
+            }
+        }
+
+        // Thêm sản phẩm vào giỏ hàng
+        private void AddToCart(int productId, int quantity)
+        {
+            try
+            {
+                var product = db.Products.SingleOrDefault(p => p.product_id == productId && p.status == "1");
+                if (product == null || Convert.ToInt32(product.quantity) < quantity)
+                {
+                    Notification.setNotification3s($"Sản phẩm {product?.product_name ?? "này"} không khả dụng hoặc không đủ hàng", "error");
+                    return;
+                }
+
+                string cookieName = $"product_{productId}";
+                var cookie = Request.Cookies[cookieName];
+                int currentQuantity = cookie != null && !string.IsNullOrEmpty(cookie.Value) ? Convert.ToInt32(cookie.Value) : 0;
+
+                int newQuantity = currentQuantity + quantity;
+                if (newQuantity > Convert.ToInt32(product.quantity))
+                {
+                    Notification.setNotification3s($"Số lượng yêu cầu vượt quá tồn kho của sản phẩm {product.product_name}", "error");
+                    return;
+                }
+
+                HttpCookie productCookie = new HttpCookie(cookieName)
+                {
+                    Value = newQuantity.ToString(),
+                    Expires = DateTime.Now.AddDays(10)
+                };
+                Response.Cookies.Add(productCookie);
+            }
+            catch (Exception ex)
+            {
+                Notification.setNotification3s("Lỗi khi thêm sản phẩm vào giỏ hàng", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+            }
+        }
+
+        // Thêm địa chỉ
         public ActionResult AddAddress()
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                return View();
+                if (User.Identity.IsAuthenticated)
+                {
+                    return View();
+                }
+                return RedirectToAction("Index", "Home");
             }
-            else
+            catch (Exception ex)
             {
+                Notification.setNotification3s("Lỗi khi tải trang thêm địa chỉ", "error");
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        // Kiểm tra trạng thái đăng nhập
         public ActionResult UserLogged()
         {
-            // Được gọi khi nhấn [Thanh toán]
-            return Json(User.Identity.IsAuthenticated, JsonRequestBehavior.AllowGet);
+            try
+            {
+                return Json(User.Identity.IsAuthenticated, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.WriteAllText(Server.MapPath("~/error.log"), ex.ToString());
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
